@@ -27,6 +27,13 @@ docker run --rm -v /data/tpch:/out ghcr.io/jsc0218/tpchgen:latest \
 
 All options are those of `tpchgen-cli`; run the image with `--help` to list them.
 
+## Benchmark steps
+
+Run these from the repository root.
+
+- [postgres/](postgres/README.md): TPC-H on PostgreSQL 18 in Docker
+- [clickhouse/](clickhouse/README.md): TPC-H on ClickHouse 26.8 (LTS) in Docker
+
 ## Build locally
 
 ```bash

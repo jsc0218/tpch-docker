@@ -90,4 +90,4 @@ sudo rm -rf /data/pg18      # deletes the database files
 
 - Tables have no keys or indexes yet; add them deliberately and record them with the results.
 - Results are TPC-H-derived, not comparable to official TPC Benchmark Results.
-- The `clickhouse` branch will hold the matching ClickHouse steps.
+- The matching ClickHouse steps are in `../clickhouse/README.md`.

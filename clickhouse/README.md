@@ -1,11 +1,11 @@
 # TPC-H on ClickHouse (Docker)
 
 Steps to run TPC-H against ClickHouse 26.8 (LTS) in Docker on the same EC2 host as the
-PostgreSQL run (see the `postgres` branch). Status: Docker start, `lineitem` create/load and Q6
+PostgreSQL run (see `../postgres/README.md`). Status: Docker start, `lineitem` create/load and Q6
 were run on SF1; the other seven tables and load commands are written but not yet run.
 
-Assumes Docker is installed and the SF1 files are already in `/data/tpch` (see the `postgres`
-branch, steps 1 to 3).
+Assumes Docker is installed and the SF1 files are already in `/data/tpch` (see
+`../postgres/README.md`, steps 1 to 3). Run the commands from the repository root.
 
 ## 1. Stop PostgreSQL
 
