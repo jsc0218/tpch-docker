@@ -33,6 +33,7 @@ Run these from the repository root.
 
 - [postgres/](postgres/README.md): TPC-H on PostgreSQL 18 in Docker
 - [clickhouse/](clickhouse/README.md): TPC-H on ClickHouse 26.8 (LTS) in Docker
+- [whpg/](whpg/README.md): TPC-H on WarehousePG 7 in Docker (single host, no mirror)
 
 ## Build locally
 
