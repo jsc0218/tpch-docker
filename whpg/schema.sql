@@ -1,21 +1,24 @@
 -- TPC-H tables for WarehousePG. Each table has a trailing `dummy` column that absorbs the
 -- trailing '|' on every row of the generated .tbl files. The two small tables are replicated to
 -- every segment; the others are hash-distributed, orders and lineitem on the order key so that
--- their join needs no data movement.
+-- their join needs no data movement. All tables are append-optimized, column-oriented and
+-- zstd-compressed (the default zstd level, 1).
 CREATE TABLE nation (
   n_nationkey INTEGER,
   n_name      CHAR(25),
   n_regionkey INTEGER,
   n_comment   VARCHAR(152),
   dummy       TEXT
-) DISTRIBUTED REPLICATED;
+) WITH (appendoptimized=true, orientation=column, compresstype=zstd)
+  DISTRIBUTED REPLICATED;
 
 CREATE TABLE region (
   r_regionkey INTEGER,
   r_name      CHAR(25),
   r_comment   VARCHAR(152),
   dummy       TEXT
-) DISTRIBUTED REPLICATED;
+) WITH (appendoptimized=true, orientation=column, compresstype=zstd)
+  DISTRIBUTED REPLICATED;
 
 CREATE TABLE part (
   p_partkey     INTEGER,
@@ -28,7 +31,8 @@ CREATE TABLE part (
   p_retailprice NUMERIC(15,2),
   p_comment     VARCHAR(23),
   dummy         TEXT
-) DISTRIBUTED BY (p_partkey);
+) WITH (appendoptimized=true, orientation=column, compresstype=zstd)
+  DISTRIBUTED BY (p_partkey);
 
 CREATE TABLE supplier (
   s_suppkey   INTEGER,
@@ -39,7 +43,8 @@ CREATE TABLE supplier (
   s_acctbal   NUMERIC(15,2),
   s_comment   VARCHAR(101),
   dummy       TEXT
-) DISTRIBUTED BY (s_suppkey);
+) WITH (appendoptimized=true, orientation=column, compresstype=zstd)
+  DISTRIBUTED BY (s_suppkey);
 
 CREATE TABLE partsupp (
   ps_partkey    INTEGER,
@@ -48,7 +53,8 @@ CREATE TABLE partsupp (
   ps_supplycost NUMERIC(15,2),
   ps_comment    VARCHAR(199),
   dummy         TEXT
-) DISTRIBUTED BY (ps_partkey);
+) WITH (appendoptimized=true, orientation=column, compresstype=zstd)
+  DISTRIBUTED BY (ps_partkey);
 
 CREATE TABLE customer (
   c_custkey    INTEGER,
@@ -60,7 +66,8 @@ CREATE TABLE customer (
   c_mktsegment CHAR(10),
   c_comment    VARCHAR(117),
   dummy        TEXT
-) DISTRIBUTED BY (c_custkey);
+) WITH (appendoptimized=true, orientation=column, compresstype=zstd)
+  DISTRIBUTED BY (c_custkey);
 
 CREATE TABLE orders (
   o_orderkey      BIGINT,
@@ -73,7 +80,8 @@ CREATE TABLE orders (
   o_shippriority  INTEGER,
   o_comment       VARCHAR(79),
   dummy           TEXT
-) DISTRIBUTED BY (o_orderkey);
+) WITH (appendoptimized=true, orientation=column, compresstype=zstd)
+  DISTRIBUTED BY (o_orderkey);
 
 CREATE TABLE lineitem (
   l_orderkey      BIGINT,
@@ -93,4 +101,5 @@ CREATE TABLE lineitem (
   l_shipmode      CHAR(10),
   l_comment       VARCHAR(44),
   dummy           TEXT
-) DISTRIBUTED BY (l_orderkey);
+) WITH (appendoptimized=true, orientation=column, compresstype=zstd)
+  DISTRIBUTED BY (l_orderkey);

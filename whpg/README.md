@@ -72,8 +72,12 @@ Expect the coordinator (`-1`) and 16 primaries, all `u`, and no `m` rows.
 docker exec -i whpg su - gpadmin -c "psql -d postgres -v ON_ERROR_STOP=1 -f -" < whpg/schema.sql
 ```
 
-`nation` and `region` are replicated; the other six tables are hash-distributed. `orders` and
-`lineitem` share the order key so that their join needs no data movement.
+The tables are append-optimized, column-oriented and zstd-compressed
+(`WITH (appendoptimized=true, orientation=column, compresstype=zstd)`, which uses zstd's default
+level, 1). This is the usual choice for analytics: a query reads only the columns it uses and the
+data compresses well. `nation` and `region` are replicated; the other six tables are
+hash-distributed. `orders` and `lineitem` share the order key so that their join needs no data
+movement.
 
 ## 4. Load
 
@@ -84,7 +88,7 @@ docker exec -i whpg su - gpadmin -c "psql -d postgres -v ON_ERROR_STOP=1 -f -" <
 docker exec whpg su - gpadmin -c "psql -d postgres -c 'SELECT count(*) FROM lineitem'"   # SF1: 6001215
 ```
 
-All eight tables took about 18 s. That single stream is the bottleneck at larger scale factors;
+All eight tables took about 14 s. That single stream is the bottleneck at larger scale factors;
 loading through `gpfdist` external tables would spread it and has not been tried here.
 
 ## 5. Run Q6
@@ -124,14 +128,12 @@ again. After a restart `lineitem` still had 6001215 rows and Q6 gave the same re
 
 | | SF1 | SF10 |
 |---|---|---|
-| Load (all tables, `load.sql`) | 18.0 s | 227 s |
-| Q6, median of 5 | 77 ms | 495 ms |
-| Q12, median of 5 | 117 ms | 696 ms |
-| Database size (all segments) | 1.80 GB | 14.62 GB |
+| Load (all tables, `load.sql`) | 14.1 s | 90 s |
+| Q6, median of 5 | 66 ms | 380 ms |
+| Q12, median of 5 | 100 ms | 531 ms |
+| Database size (all segments) | 0.29 GB | 2.88 GB |
 
-Untuned: `shared_buffers` and `statement_mem` are 125 MB, ORCA is on. With one segment and a
-mirror, the SF1 load took 67 s and Q6 629 ms; with one segment and no mirror, 30 s and 633 ms.
-The comparison with the other engines is in the
+Untuned: `shared_buffers` and `statement_mem` are 125 MB, ORCA is on. The comparison with the other engines is in the
 [root README](../README.md#results-sf1-and-sf10-q6-and-q12-not-a-benchmark).
 
 ## Removing things
@@ -148,14 +150,15 @@ sudo rm -rf /data/whpg      # deletes the database files
   reports `7.0.0-beta.0 build dev` with no commit, so pin the image digest and record it with any
   results.
 - No indexes and no tuning; record the distribution keys and any settings with results.
-- Tuning was tried on SF10 and left out. Raising `statement_mem` to 1 GB changed nothing: the
+- Tuning was tried on SF10 (on plain heap tables, before the switch to column storage) and left out. Raising `statement_mem` to 1 GB changed nothing: the
   Q12 hash table is built on the filtered `lineitem` rows (about 10,000 per segment), uses 1.5 MB
   and does not spill. A larger `shared_buffers` (2 GB per segment) changed nothing either. 32
   segments instead of 16 gave 16 to 22 % on Q6 and Q12, which fits the hyperthreading: 16
   segments already use every physical core.
 - Primary keys on `orders` and `lineitem` plus single-column date indexes (within the TPC-H
-  rules) made Q6 and Q12 slower on SF10 (ORCA chose index scans on the date columns); they were
+  rules) made Q6 and Q12 slower on SF10 (heap tables) (ORCA chose index scans on the date columns); they were
   dropped again.
-- Database size is `pg_database_size(current_database())`, summed over all segments. The data
-  directories are larger because every segment keeps its own recycled WAL (12.9 GB on SF10).
+- Database size is the sum of `pg_total_relation_size` over the tables on all segments (the small
+  append-optimized bookkeeping tables are not counted). The data directories are larger because
+  every segment keeps its own recycled WAL.
 - Results are TPC-H-derived, not comparable to official TPC Benchmark Results.

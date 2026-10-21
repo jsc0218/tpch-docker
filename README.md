@@ -33,7 +33,7 @@ Run these from the repository root.
 
 - [postgres/](postgres/README.md): TPC-H on PostgreSQL 18 in Docker
 - [clickhouse/](clickhouse/README.md): TPC-H on ClickHouse 26.8 (LTS) in Docker
-- [whpg/](whpg/README.md): TPC-H on WarehousePG 7 in Docker (single host, no mirror)
+- [whpg/](whpg/README.md): TPC-H on WarehousePG 7 in Docker (single host, no mirror, column-oriented zstd tables)
 - [monetdb/](monetdb/README.md): TPC-H on MonetDB (Dec2025-SP3) in Docker
 
 Each folder has the same layout: `README.md` (steps), `schema.sql`, `queries/q6.sql` and
@@ -51,7 +51,7 @@ One EC2 host (Ubuntu, x86_64, 32 vCPUs = 16 cores with hyperthreading, 61 GB RAM
 running at a time, median of 5 warm runs in one session. Every engine returns the same answers:
 Q6 is `123141078.2283` at SF1 and `1230113636.0101` at SF10, and Q12 gives the same rows.
 
-<img alt="Bar charts of the SF10 results, lower is better. Q6 time: MonetDB 17.1 ms, ClickHouse 75 ms, WarehousePG 495 ms, PostgreSQL 831 ms. Q12 time: 43.6, 122, 696 and 2174 ms. Load time: 122, 13.7, 227 and 305 s. Database size: 9.11, 4.65, 14.62 and 14.39 GB (raw files 11.23 GB). The tables below have all values, including SF1." src="charts/sf10.svg">
+<img alt="Bar charts of the SF10 results, lower is better. Q6 time: MonetDB 17.1 ms, ClickHouse 75 ms, WarehousePG 380 ms, PostgreSQL 831 ms. Q12 time: 43.6, 122, 531 and 2174 ms. Load time: 122, 13.7, 90 and 305 s. Database size: 9.11, 4.65, 2.88 and 14.39 GB (raw files 11.23 GB). The tables below have all values, including SF1." src="charts/sf10.svg">
 
 The chart shows SF10 only, with one linear axis per panel, so bar lengths compare within a panel but
 not between panels. It is drawn from [`charts/results.csv`](charts/results.csv) by
@@ -62,7 +62,7 @@ plus SF1.
 |---|---|---|---|---|---|---|
 | MonetDB 11.55.7 (Dec2025-SP3) | 15.7 s | 122 s | 3.8 ms | 17.1 ms | 9.5 ms | 43.6 ms |
 | ClickHouse 26.8 | 4.6 s | 13.7 s | 16 ms | 75 ms | 27 ms | 122 ms |
-| WarehousePG 7 (16 segments, no mirror) | 18.0 s | 227 s | 77 ms | 495 ms | 117 ms | 696 ms |
+| WarehousePG 7 (16 segments, no mirror, AO column zstd) | 14.1 s | 90 s | 66 ms | 380 ms | 100 ms | 531 ms |
 | PostgreSQL 18.6 | 40.7 s | 305 s | 115 ms | 831 ms | 225 ms | 2174 ms |
 
 Database size (not the data directory, which also holds WAL and logs):
@@ -73,13 +73,14 @@ Database size (not the data directory, which also holds WAL and logs):
 | ClickHouse (compressed, active parts) | 0.46 GB | 4.65 GB |
 | MonetDB (`sys.storage`) | 0.89 GB | 9.11 GB |
 | PostgreSQL | 1.45 GB | 14.39 GB |
-| WarehousePG (all segments) | 1.80 GB | 14.62 GB |
+| WarehousePG, AO column zstd (all segments) | 0.29 GB | 2.88 GB |
 
 Settings: PostgreSQL uses the flags in `postgres/README.md` (16 GB `shared_buffers`, parallel
-workers, JIT off). WarehousePG is untuned apart from 16 segments and no mirror. ClickHouse and
-MonetDB run on server defaults. The tables have no keys or secondary indexes (ClickHouse's
-`ORDER BY` sort key is the TPC-H primary key). Loads are not like for like: ClickHouse streams
-through its client, the others use a server-side `COPY`.
+workers, JIT off). WarehousePG is untuned apart from 16 segments and no mirror; its tables are
+append-optimized, column-oriented and zstd-compressed (default zstd level), the usual choice for
+analytics. ClickHouse and MonetDB run on server defaults. The tables have no keys or secondary
+indexes (ClickHouse's `ORDER BY` sort key is the TPC-H primary key). Loads are not like for like:
+ClickHouse streams through its client, the others use a server-side `COPY`.
 
 ## Build locally
 

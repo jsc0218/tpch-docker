@@ -1,35 +1,35 @@
 chart,panel,engine,value,label
 latency,Q6 · SF1,MonetDB,3.8,3.8 ms
 latency,Q6 · SF1,ClickHouse,16,16 ms
-latency,Q6 · SF1,WarehousePG,77,77 ms
+latency,Q6 · SF1,WarehousePG,66,66 ms
 latency,Q6 · SF1,PostgreSQL,115,115 ms
 latency,Q6 · SF10,MonetDB,17.1,17.1 ms
 latency,Q6 · SF10,ClickHouse,75,75 ms
-latency,Q6 · SF10,WarehousePG,495,495 ms
+latency,Q6 · SF10,WarehousePG,380,380 ms
 latency,Q6 · SF10,PostgreSQL,831,831 ms
 latency,Q12 · SF1,MonetDB,9.5,9.5 ms
 latency,Q12 · SF1,ClickHouse,27,27 ms
-latency,Q12 · SF1,WarehousePG,117,117 ms
+latency,Q12 · SF1,WarehousePG,100,100 ms
 latency,Q12 · SF1,PostgreSQL,225,225 ms
 latency,Q12 · SF10,MonetDB,43.6,43.6 ms
 latency,Q12 · SF10,ClickHouse,122,122 ms
-latency,Q12 · SF10,WarehousePG,696,696 ms
+latency,Q12 · SF10,WarehousePG,531,531 ms
 latency,Q12 · SF10,PostgreSQL,2174,2174 ms
 load,SF1,MonetDB,15.7,15.7 s
 load,SF1,ClickHouse,4.6,4.6 s
-load,SF1,WarehousePG,18.0,18.0 s
+load,SF1,WarehousePG,14.1,14.1 s
 load,SF1,PostgreSQL,40.7,40.7 s
 load,SF10,MonetDB,122,122 s
 load,SF10,ClickHouse,13.7,13.7 s
-load,SF10,WarehousePG,227,227 s
+load,SF10,WarehousePG,90,90 s
 load,SF10,PostgreSQL,305,305 s
 size,SF1,MonetDB,0.89,0.89 GB
 size,SF1,ClickHouse,0.46,0.46 GB
-size,SF1,WarehousePG,1.80,1.80 GB
+size,SF1,WarehousePG,0.29,0.29 GB
 size,SF1,PostgreSQL,1.45,1.45 GB
 size,SF1,raw,1.10,1.10 GB
 size,SF10,MonetDB,9.11,9.11 GB
 size,SF10,ClickHouse,4.65,4.65 GB
-size,SF10,WarehousePG,14.62,14.62 GB
+size,SF10,WarehousePG,2.88,2.88 GB
 size,SF10,PostgreSQL,14.39,14.39 GB
 size,SF10,raw,11.23,11.23 GB
