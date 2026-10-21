@@ -51,6 +51,13 @@ One EC2 host (Ubuntu, x86_64, 32 vCPUs = 16 cores with hyperthreading, 61 GB RAM
 running at a time, median of 5 warm runs in one session. Every engine returns the same answers:
 Q6 is `123141078.2283` at SF1 and `1230113636.0101` at SF10, and Q12 gives the same rows.
 
+<img alt="Bar charts of the SF10 results, lower is better. Q6 time: MonetDB 17.1 ms, ClickHouse 75 ms, WarehousePG 495 ms, PostgreSQL 831 ms. Q12 time: 43.6, 122, 696 and 2174 ms. Load time: 122, 13.7, 227 and 305 s. Database size: 9.11, 4.65, 14.62 and 14.39 GB (raw files 11.23 GB). The tables below have all values, including SF1." src="charts/sf10.svg">
+
+The chart shows SF10 only, with one linear axis per panel, so bar lengths compare within a panel but
+not between panels. It is drawn from [`charts/results.csv`](charts/results.csv) by
+`python3 charts/make_charts.py` (standard library only). The tables below hold the same numbers,
+plus SF1.
+
 | Engine | Load SF1 | Load SF10 | Q6 SF1 | Q6 SF10 | Q12 SF1 | Q12 SF10 |
 |---|---|---|---|---|---|---|
 | MonetDB 11.55.7 (Dec2025-SP3) | 15.7 s | 122 s | 3.8 ms | 17.1 ms | 9.5 ms | 43.6 ms |

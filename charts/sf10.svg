@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 462" width="900" height="462" role="img" aria-labelledby="t d" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+<title id="t">TPC-H SF10, lower is better</title>
+<desc id="d">One host, one engine at a time; query times are the median of 5 warm runs. Q6 query time (scan): MonetDB 17.1 ms, ClickHouse 75 ms, WarehousePG 495 ms, PostgreSQL 831 ms; Q12 query time (join): MonetDB 43.6 ms, ClickHouse 122 ms, WarehousePG 696 ms, PostgreSQL 2174 ms; Load time: MonetDB 122 s, ClickHouse 13.7 s, WarehousePG 227 s, PostgreSQL 305 s; Database size: MonetDB 9.11 GB, ClickHouse 4.65 GB, WarehousePG 14.62 GB, PostgreSQL 14.39 GB.</desc>
+<rect width="900" height="462" fill="#fcfcfb"/>
+<text x="24" y="34" font-size="17" font-weight="700" fill="#0b0b0b">TPC-H SF10, lower is better</text>
+<text x="24" y="55" font-size="12" fill="#52514e">One host, one engine at a time; query times are the median of 5 warm runs</text>
+<rect x="24" y="70" width="10" height="10" rx="2" fill="#2a78d6"/>
+<text x="40" y="79" font-size="12" fill="#52514e">MonetDB</text>
+<rect x="156" y="70" width="10" height="10" rx="2" fill="#eb6834"/>
+<text x="172" y="79" font-size="12" fill="#52514e">ClickHouse</text>
+<rect x="288" y="70" width="10" height="10" rx="2" fill="#1baf7a"/>
+<text x="304" y="79" font-size="12" fill="#52514e">WarehousePG</text>
+<rect x="420" y="70" width="10" height="10" rx="2" fill="#eda100"/>
+<text x="436" y="79" font-size="12" fill="#52514e">PostgreSQL</text>
+<text x="24.0" y="114" font-size="13" font-weight="600" fill="#0b0b0b">Q6 query time (scan)</text>
+<text x="124.0" y="254" font-size="11" text-anchor="middle" fill="#898781">0</text>
+<line x1="172.4" y1="126" x2="172.4" y2="238" stroke="#e1e0d9" stroke-width="1"/>
+<text x="172.4" y="254" font-size="11" text-anchor="middle" fill="#898781">200</text>
+<line x1="220.8" y1="126" x2="220.8" y2="238" stroke="#e1e0d9" stroke-width="1"/>
+<text x="220.8" y="254" font-size="11" text-anchor="middle" fill="#898781">400</text>
+<line x1="269.2" y1="126" x2="269.2" y2="238" stroke="#e1e0d9" stroke-width="1"/>
+<text x="269.2" y="254" font-size="11" text-anchor="middle" fill="#898781">600</text>
+<line x1="317.6" y1="126" x2="317.6" y2="238" stroke="#e1e0d9" stroke-width="1"/>
+<text x="317.6" y="254" font-size="11" text-anchor="middle" fill="#898781">800</text>
+<line x1="366.0" y1="126" x2="366.0" y2="238" stroke="#e1e0d9" stroke-width="1"/>
+<text x="366.0" y="254" font-size="11" text-anchor="middle" fill="#898781">1000</text>
+<line x1="124.0" y1="126" x2="124.0" y2="238" stroke="#c3c2b7" stroke-width="1"/>
+<path d="M124.0,131.0 h2.1 a2.1,2.1 0 0 1 2.1,2.1 v13.9 a2.1,2.1 0 0 1 -2.1,2.1 h-2.1 z" fill="#2a78d6"/>
+<text x="118.0" y="144.0" font-size="12" text-anchor="end" fill="#52514e">MonetDB</text>
+<text x="135.1" y="144.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">17.1 ms</text>
+<path d="M124.0,159.0 h14.1 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-14.1 z" fill="#eb6834"/>
+<text x="118.0" y="172.0" font-size="12" text-anchor="end" fill="#52514e">ClickHouse</text>
+<text x="149.2" y="172.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">75 ms</text>
+<path d="M124.0,187.0 h115.8 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-115.8 z" fill="#1baf7a"/>
+<text x="118.0" y="200.0" font-size="12" text-anchor="end" fill="#52514e">WarehousePG</text>
+<text x="250.8" y="200.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">495 ms</text>
+<path d="M124.0,215.0 h197.1 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-197.1 z" fill="#eda100"/>
+<text x="118.0" y="228.0" font-size="12" text-anchor="end" fill="#52514e">PostgreSQL</text>
+<text x="332.1" y="228.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">831 ms</text>
+<text x="468.0" y="114" font-size="13" font-weight="600" fill="#0b0b0b">Q12 query time (join)</text>
+<text x="568.0" y="254" font-size="11" text-anchor="middle" fill="#898781">0</text>
+<line x1="616.4" y1="126" x2="616.4" y2="238" stroke="#e1e0d9" stroke-width="1"/>
+<text x="616.4" y="254" font-size="11" text-anchor="middle" fill="#898781">500</text>
+<line x1="664.8" y1="126" x2="664.8" y2="238" stroke="#e1e0d9" stroke-width="1"/>
+<text x="664.8" y="254" font-size="11" text-anchor="middle" fill="#898781">1000</text>
+<line x1="713.2" y1="126" x2="713.2" y2="238" stroke="#e1e0d9" stroke-width="1"/>
+<text x="713.2" y="254" font-size="11" text-anchor="middle" fill="#898781">1500</text>
+<line x1="761.6" y1="126" x2="761.6" y2="238" stroke="#e1e0d9" stroke-width="1"/>
+<text x="761.6" y="254" font-size="11" text-anchor="middle" fill="#898781">2000</text>
+<line x1="810.0" y1="126" x2="810.0" y2="238" stroke="#e1e0d9" stroke-width="1"/>
+<text x="810.0" y="254" font-size="11" text-anchor="middle" fill="#898781">2500</text>
+<line x1="568.0" y1="126" x2="568.0" y2="238" stroke="#c3c2b7" stroke-width="1"/>
+<path d="M568.0,131.0 h2.1 a2.1,2.1 0 0 1 2.1,2.1 v13.8 a2.1,2.1 0 0 1 -2.1,2.1 h-2.1 z" fill="#2a78d6"/>
+<text x="562.0" y="144.0" font-size="12" text-anchor="end" fill="#52514e">MonetDB</text>
+<text x="579.2" y="144.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">43.6 ms</text>
+<path d="M568.0,159.0 h7.8 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-7.8 z" fill="#eb6834"/>
+<text x="562.0" y="172.0" font-size="12" text-anchor="end" fill="#52514e">ClickHouse</text>
+<text x="586.8" y="172.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">122 ms</text>
+<path d="M568.0,187.0 h63.4 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-63.4 z" fill="#1baf7a"/>
+<text x="562.0" y="200.0" font-size="12" text-anchor="end" fill="#52514e">WarehousePG</text>
+<text x="642.4" y="200.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">696 ms</text>
+<path d="M568.0,215.0 h206.4 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-206.4 z" fill="#eda100"/>
+<text x="562.0" y="228.0" font-size="12" text-anchor="end" fill="#52514e">PostgreSQL</text>
+<text x="785.4" y="228.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">2174 ms</text>
+<text x="24.0" y="298" font-size="13" font-weight="600" fill="#0b0b0b">Load time</text>
+<text x="124.0" y="438" font-size="11" text-anchor="middle" fill="#898781">0</text>
+<line x1="184.5" y1="310" x2="184.5" y2="422" stroke="#e1e0d9" stroke-width="1"/>
+<text x="184.5" y="438" font-size="11" text-anchor="middle" fill="#898781">100</text>
+<line x1="245.0" y1="310" x2="245.0" y2="422" stroke="#e1e0d9" stroke-width="1"/>
+<text x="245.0" y="438" font-size="11" text-anchor="middle" fill="#898781">200</text>
+<line x1="305.5" y1="310" x2="305.5" y2="422" stroke="#e1e0d9" stroke-width="1"/>
+<text x="305.5" y="438" font-size="11" text-anchor="middle" fill="#898781">300</text>
+<line x1="366.0" y1="310" x2="366.0" y2="422" stroke="#e1e0d9" stroke-width="1"/>
+<text x="366.0" y="438" font-size="11" text-anchor="middle" fill="#898781">400</text>
+<line x1="124.0" y1="310" x2="124.0" y2="422" stroke="#c3c2b7" stroke-width="1"/>
+<path d="M124.0,315.0 h69.8 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-69.8 z" fill="#2a78d6"/>
+<text x="118.0" y="328.0" font-size="12" text-anchor="end" fill="#52514e">MonetDB</text>
+<text x="204.8" y="328.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">122 s</text>
+<path d="M124.0,343.0 h4.3 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-4.3 z" fill="#eb6834"/>
+<text x="118.0" y="356.0" font-size="12" text-anchor="end" fill="#52514e">ClickHouse</text>
+<text x="139.3" y="356.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">13.7 s</text>
+<path d="M124.0,371.0 h133.3 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-133.3 z" fill="#1baf7a"/>
+<text x="118.0" y="384.0" font-size="12" text-anchor="end" fill="#52514e">WarehousePG</text>
+<text x="268.3" y="384.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">227 s</text>
+<path d="M124.0,399.0 h180.5 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-180.5 z" fill="#eda100"/>
+<text x="118.0" y="412.0" font-size="12" text-anchor="end" fill="#52514e">PostgreSQL</text>
+<text x="315.5" y="412.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">305 s</text>
+<text x="468.0" y="298" font-size="13" font-weight="600" fill="#0b0b0b">Database size</text>
+<text x="568.0" y="438" font-size="11" text-anchor="middle" fill="#898781">0</text>
+<line x1="648.7" y1="310" x2="648.7" y2="422" stroke="#e1e0d9" stroke-width="1"/>
+<text x="648.7" y="438" font-size="11" text-anchor="middle" fill="#898781">5</text>
+<line x1="729.3" y1="310" x2="729.3" y2="422" stroke="#e1e0d9" stroke-width="1"/>
+<text x="729.3" y="438" font-size="11" text-anchor="middle" fill="#898781">10</text>
+<line x1="810.0" y1="310" x2="810.0" y2="422" stroke="#e1e0d9" stroke-width="1"/>
+<text x="810.0" y="438" font-size="11" text-anchor="middle" fill="#898781">15</text>
+<line x1="568.0" y1="310" x2="568.0" y2="422" stroke="#c3c2b7" stroke-width="1"/>
+<path d="M568.0,315.0 h143.0 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-143.0 z" fill="#2a78d6"/>
+<text x="562.0" y="328.0" font-size="12" text-anchor="end" fill="#52514e">MonetDB</text>
+<text x="722.0" y="328.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">9.11 GB</text>
+<path d="M568.0,343.0 h71.0 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-71.0 z" fill="#eb6834"/>
+<text x="562.0" y="356.0" font-size="12" text-anchor="end" fill="#52514e">ClickHouse</text>
+<text x="650.0" y="356.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">4.65 GB</text>
+<path d="M568.0,371.0 h231.9 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-231.9 z" fill="#1baf7a"/>
+<text x="562.0" y="384.0" font-size="12" text-anchor="end" fill="#52514e">WarehousePG</text>
+<text x="810.9" y="384.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">14.62 GB</text>
+<path d="M568.0,399.0 h228.2 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-228.2 z" fill="#eda100"/>
+<text x="562.0" y="412.0" font-size="12" text-anchor="end" fill="#52514e">PostgreSQL</text>
+<text x="807.2" y="412.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">14.39 GB</text>
+<line x1="749.2" y1="306" x2="749.2" y2="422" stroke="#52514e" stroke-width="1.5"/>
+<text x="754.2" y="298" font-size="11" fill="#52514e">raw .tbl files 11.23 GB</text>
+</svg>
