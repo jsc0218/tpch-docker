@@ -2,7 +2,9 @@
 
 Steps to run TPC-H against WarehousePG 7 in Docker on the same EC2 host as the PostgreSQL and
 ClickHouse runs (see `../postgres/README.md` and `../clickhouse/README.md`). Status: every step
-below was run on SF1 with 16 segments and no mirror (Ubuntu, x86_64, 32 vCPUs, 61 GB RAM).
+below was run on SF1 and SF10 with 16 segments and no mirror (Ubuntu, x86_64, 32 vCPUs = 16 cores
+with hyperthreading, 61 GB RAM). The other engines are in `../postgres/`, `../clickhouse/` and
+`../monetdb/`.
 
 Assumes Docker is installed and the SF1 files are already in `/data/tpch` (see
 `../postgres/README.md`, steps 1 to 3). Run the commands from the repository root.
@@ -12,7 +14,7 @@ Assumes Docker is installed and the SF1 files are already in `/data/tpch` (see
 Run one engine at a time so they do not compete for CPU and cache.
 
 ```bash
-docker stop pg18 ch
+docker stop pg18 ch mdb 2>/dev/null || true      # whichever of the other engines are running
 ```
 
 ## 2. Start WarehousePG
@@ -91,7 +93,7 @@ loading through `gpfdist` external tables would spread it and has not been tried
 docker exec -i whpg su - gpadmin -c "psql -d postgres -c '\timing on' -f -" < whpg/queries/q6.sql
 ```
 
-Expect `123141078.2283`. Median over 5 runs:
+Expect `123141078.2283` (SF10: `1230113636.0101`). Median over 5 runs:
 
 ```bash
 for i in 1 2 3 4 5; do
@@ -99,23 +101,38 @@ for i in 1 2 3 4 5; do
 done
 ```
 
+## 6. Run Q12
+
+```bash
+docker exec -i whpg su - gpadmin -c "psql -d postgres -c '\timing on' -f -" < whpg/queries/q12.sql
+```
+
+Q12 is a join of `orders` and `lineitem`. Both tables are distributed on the order key, so each
+segment joins its own rows and the plan has no data motion before the join. At SF1 the result is
+MAIL 6202 9324 and SHIP 6200 9262 (SF10: MAIL 62071 93045, SHIP 62426 93261).
+
+To run SF10, start a second cluster the same way, with its own data directory, `-v
+/data/tpch10:/data/tpch:ro` instead of the SF1 mount, and a different name and published port.
+
 ## Restart
 
 `docker stop whpg` then `docker start whpg` keeps the data: the bootstrap detects the existing
 cluster and starts it (a stop took about 12 s). Wait for `bootstrap complete` in `docker logs`
 again. After a restart `lineitem` still had 6001215 rows and Q6 gave the same result.
 
-## Observed so far (SF1, Q6, single runs, not a benchmark)
+## Observed so far (16 segments, no mirror, not a benchmark)
 
-| Engine | Load (all tables) | Q6 (warm) |
+| | SF1 | SF10 |
 |---|---|---|
-| PostgreSQL 18.6 (16 parallel workers) | 38.7 s | 108 ms |
-| WarehousePG 7, 16 segments, no mirror | 18.0 s | 74 ms |
-| ClickHouse 26.8 | 4.2 s | about 15 ms |
+| Load (all tables, `load.sql`) | 18.0 s | 227 s |
+| Q6, median of 5 | 77 ms | 495 ms |
+| Q12, median of 5 | 117 ms | 696 ms |
+| Database size (all segments) | 1.80 GB | 14.62 GB |
 
-With one segment and a mirror, the same load took 67 s and Q6 629 ms; with one segment and no
-mirror, 30 s and 633 ms. WarehousePG memory is untuned (`shared_buffers` and `statement_mem` are
-125 MB). Take medians of several runs, and time the engines the same way, before comparing.
+Untuned: `shared_buffers` and `statement_mem` are 125 MB, ORCA is on. With one segment and a
+mirror, the SF1 load took 67 s and Q6 629 ms; with one segment and no mirror, 30 s and 633 ms.
+The comparison with the other engines is in the
+[root README](../README.md#results-sf1-and-sf10-q6-and-q12-not-a-benchmark).
 
 ## Removing things
 
@@ -131,4 +148,14 @@ sudo rm -rf /data/whpg      # deletes the database files
   reports `7.0.0-beta.0 build dev` with no commit, so pin the image digest and record it with any
   results.
 - No indexes and no tuning; record the distribution keys and any settings with results.
+- Tuning was tried on SF10 and left out. Raising `statement_mem` to 1 GB changed nothing: the
+  Q12 hash table is built on the filtered `lineitem` rows (about 10,000 per segment), uses 1.5 MB
+  and does not spill. A larger `shared_buffers` (2 GB per segment) changed nothing either. 32
+  segments instead of 16 gave 16 to 22 % on Q6 and Q12, which fits the hyperthreading: 16
+  segments already use every physical core.
+- Primary keys on `orders` and `lineitem` plus single-column date indexes (within the TPC-H
+  rules) made Q6 and Q12 slower on SF10 (ORCA chose index scans on the date columns); they were
+  dropped again.
+- Database size is `pg_database_size(current_database())`, summed over all segments. The data
+  directories are larger because every segment keeps its own recycled WAL (12.9 GB on SF10).
 - Results are TPC-H-derived, not comparable to official TPC Benchmark Results.
