@@ -5,7 +5,7 @@ Standard library only:  python3 charts/make_charts.py
 
 Design: one colour per engine in a fixed order, thin bars that grow from a single baseline, hairline
 grid, values at the bar tips, one linear axis per panel (so bar lengths compare within a panel, not
-between panels). The README tables hold the same numbers, plus SF1.
+between panels). The README tables hold the same numbers.
 """
 import csv
 import math

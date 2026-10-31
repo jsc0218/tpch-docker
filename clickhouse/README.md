@@ -1,10 +1,10 @@
 # TPC-H on ClickHouse (Docker)
 
 Steps to run TPC-H against ClickHouse 26.8 (LTS) in Docker on the same EC2 host as the
-PostgreSQL run (see `../postgres/README.md`). Status: all steps below were run on SF1 and SF10
+PostgreSQL run (see `../postgres/README.md`). Status: all steps below were run on SF10
 (all eight tables, Q6 and Q12). The other engines are in `../whpg/` and `../monetdb/`.
 
-Assumes Docker is installed and the SF1 files are already in `/data/tpch` (see
+Assumes Docker is installed and the SF10 files are already in `/data/tpch` (see
 `../postgres/README.md`, steps 1 to 3). Run the commands from the repository root.
 
 ## 1. Stop the other engines
@@ -50,22 +50,8 @@ for t in nation region part supplier partsupp customer orders lineitem; do
     -q "INSERT INTO $t FORMAT CSV" < /data/tpch/$t.tbl
 done
 
-docker exec -it ch clickhouse-client -q "SELECT count() FROM lineitem"   # SF1: 6001215
+docker exec -it ch clickhouse-client -q "SELECT count() FROM lineitem"   # SF10: 59986052
 ```
-
-To run SF10 next to SF1, create a database and load into it:
-
-```bash
-docker exec ch clickhouse-client -q "CREATE DATABASE tpch10"
-docker exec -i ch clickhouse-client -d tpch10 --multiquery < clickhouse/schema.sql
-for t in nation region part supplier partsupp customer orders lineitem; do
-  docker exec -i ch clickhouse-client -d tpch10 \
-    --format_csv_delimiter='|' \
-    -q "INSERT INTO $t FORMAT CSV" < /data/tpch10/$t.tbl
-done
-```
-
-and add `-d tpch10` to the queries below.
 
 ## 5. Run Q6
 
@@ -73,7 +59,7 @@ and add `-d tpch10` to the queries below.
 docker exec -i ch clickhouse-client --time < clickhouse/queries/q6.sql
 ```
 
-Expect `123141078.2283` (SF10: `1230113636.0101`), then the elapsed time in seconds
+Expect `1230113636.0101`, then the elapsed time in seconds
 (0.017 = 17 ms).
 
 Median over 5 runs:
@@ -88,26 +74,26 @@ for i in 1 2 3 4 5; do docker exec -i ch clickhouse-client --time < clickhouse/q
 docker exec -i ch clickhouse-client --time < clickhouse/queries/q12.sql
 ```
 
-Q12 is a join of `orders` and `lineitem`; the query uses an explicit `JOIN ... ON`. At SF1 the
-result is MAIL 6202 9324 and SHIP 6200 9262 (SF10: MAIL 62071 93045, SHIP 62426 93261).
+Q12 is a join of `orders` and `lineitem`; the query uses an explicit `JOIN ... ON`. At SF10 the
+result is MAIL 62071 93045 and SHIP 62426 93261.
 
 ## Pitfall: decimal arithmetic in query text
 
 ClickHouse evaluates `0.06 + 0.01` as Float64 (`0.06999999999999999`). Compared against a
 `Decimal(15,2)` column, rows equal to 0.07 are dropped. The standard Q6 text
 (`BETWEEN 0.06 - 0.01 AND 0.06 + 0.01`) therefore returns `75207768.1855`, not
-`123141078.2283`. Write such bounds as literals. Other queries with decimal arithmetic may need
-the same treatment; check every query's result against the official SF1 answers before
+`123141078.2283` at SF1 (the answer is `1230113636.0101` at SF10). Write such bounds as literals. Other queries with decimal arithmetic may need
+the same treatment; check every query's result against the official answers before
 trusting its timing.
 
 ## Observed so far (not a benchmark)
 
-| | SF1 | SF10 |
-|---|---|---|
-| Load (all tables, client streaming) | 4.6 s | 13.7 s |
-| Q6, median of 5 | 16 ms | 75 ms |
-| Q12, median of 5 | 27 ms | 122 ms |
-| Table size on disk (compressed, active parts) | 0.46 GB | 4.65 GB |
+| | SF10 |
+|---|---|
+| Load (all tables, client streaming) | 13.6 s |
+| Q6, median of 5 | 72 ms |
+| Q12, median of 5 | 113 ms |
+| Table size on disk (compressed, active parts) | 4.65 GB |
 
 Server defaults, default compression, one session, warm cache. The comparison with the other
 engines is in the [root README](../README.md#results-sf1-and-sf10-q6-and-q12-not-a-benchmark).

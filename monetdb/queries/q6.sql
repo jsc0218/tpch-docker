@@ -1,5 +1,5 @@
 -- TPC-H Q6 with the standard validation parameters (DATE=1994-01-01, DISCOUNT=0.06, QUANTITY=24).
--- Expected result at SF1: 123141078.2283
+-- Expected result at SF10: 1230113636.0101
 SELECT sum(l_extendedprice * l_discount) AS revenue
 FROM lineitem
 WHERE l_shipdate >= DATE '1994-01-01'

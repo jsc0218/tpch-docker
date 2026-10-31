@@ -42,38 +42,36 @@ Each folder has the same layout: `README.md` (steps), `schema.sql`, `queries/q6.
 queries are the standard text with the validation parameters, adapted only for each engine's
 SQL dialect.
 
-For a larger scale factor, generate it into its own directory (for example `-s 10` into
-`/data/tpch10`) and use a separate data directory per engine; the folder READMEs say how.
+All steps use scale factor 10 (`-s 10`, about 11 GB of `.tbl` files) in `/data/tpch`, with a separate
+data directory per engine.
 
-## Results (SF1 and SF10, Q6 and Q12, not a benchmark)
+## Results (SF10, Q6 and Q12, not a benchmark)
 
 One EC2 host (Ubuntu, x86_64, 32 vCPUs = 16 cores with hyperthreading, 61 GB RAM), one engine
 running at a time, median of 5 warm runs in one session. Every engine returns the same answers:
-Q6 is `123141078.2283` at SF1 and `1230113636.0101` at SF10, and Q12 gives the same rows.
+Q6 is `1230113636.0101` and Q12 gives the same rows (MAIL 62071 93045, SHIP 62426 93261).
 
-<img alt="Bar charts of the SF10 results, lower is better. Q6 time: MonetDB 17.1 ms, ClickHouse 75 ms, WarehousePG 380 ms, PostgreSQL 831 ms. Q12 time: 43.6, 122, 531 and 2174 ms. Load time: 122, 13.7, 90 and 305 s. Database size: 9.11, 4.65, 2.88 and 14.39 GB (raw files 11.23 GB). The tables below have all values, including SF1." src="charts/sf10.svg">
+<img alt="Bar charts of the SF10 results, lower is better. Q6 time: MonetDB 17.7 ms, ClickHouse 72 ms, WarehousePG 402 ms, PostgreSQL 777 ms. Q12 time: 44.8, 113, 554 and 2091 ms. Load time: 37.4, 13.6, 63.8 and 132 s. Database size: 9.11, 4.65, 2.88 and 14.39 GB (raw files 11.23 GB). The tables below hold the same values." src="charts/sf10.svg">
 
-The chart shows SF10 only, with one linear axis per panel, so bar lengths compare within a panel but
-not between panels. It is drawn from [`charts/results.csv`](charts/results.csv) by
-`python3 charts/make_charts.py` (standard library only). The tables below hold the same numbers,
-plus SF1.
+The chart has one linear axis per panel, so bar lengths compare within a panel but not between panels. It is drawn from [`charts/results.csv`](charts/results.csv) by
+`python3 charts/make_charts.py` (standard library only).
 
-| Engine | Load SF1 | Load SF10 | Q6 SF1 | Q6 SF10 | Q12 SF1 | Q12 SF10 |
-|---|---|---|---|---|---|---|
-| MonetDB 11.55.7 (Dec2025-SP3) | 15.7 s | 122 s | 3.8 ms | 17.1 ms | 9.5 ms | 43.6 ms |
-| ClickHouse 26.8 | 4.6 s | 13.7 s | 16 ms | 75 ms | 27 ms | 122 ms |
-| WarehousePG 7 (16 segments, no mirror, AO column zstd) | 14.1 s | 90 s | 66 ms | 380 ms | 100 ms | 531 ms |
-| PostgreSQL 18.6 | 40.7 s | 305 s | 115 ms | 831 ms | 225 ms | 2174 ms |
+| Engine | Load | Q6 | Q12 |
+|---|---|---|---|
+| MonetDB 11.55.7 (Dec2025-SP3) | 37.4 s | 17.7 ms | 44.8 ms |
+| ClickHouse 26.8 | 13.6 s | 72 ms | 113 ms |
+| WarehousePG 7 (16 segments, no mirror, AO column zstd) | 63.8 s | 402 ms | 554 ms |
+| PostgreSQL 18.6 | 132 s | 777 ms | 2091 ms |
 
 Database size (not the data directory, which also holds WAL and logs):
 
-| | SF1 | SF10 |
-|---|---|---|
-| Raw `.tbl` files | 1.10 GB | 11.23 GB |
-| ClickHouse (compressed, active parts) | 0.46 GB | 4.65 GB |
-| MonetDB (`sys.storage`) | 0.89 GB | 9.11 GB |
-| PostgreSQL | 1.45 GB | 14.39 GB |
-| WarehousePG, AO column zstd (all segments) | 0.29 GB | 2.88 GB |
+| | SF10 |
+|---|---|
+| Raw `.tbl` files | 11.23 GB |
+| ClickHouse (compressed, active parts) | 4.65 GB |
+| MonetDB (`sys.storage`) | 9.11 GB |
+| PostgreSQL | 14.39 GB |
+| WarehousePG, AO column zstd (all segments) | 2.88 GB |
 
 Settings: PostgreSQL uses the flags in `postgres/README.md` (16 GB `shared_buffers`, parallel
 workers, JIT off). WarehousePG is untuned apart from 16 segments and no mirror; its tables are

@@ -1,7 +1,7 @@
 # TPC-H on PostgreSQL (Docker)
 
 Steps to run TPC-H against PostgreSQL 18 in Docker on an EC2 host (Ubuntu, x86_64, 32 vCPUs,
-61 GB RAM). Status: the load, Q6 and Q12 were run on SF1 and SF10 with scripted equivalents of
+61 GB RAM). Status: the load, Q6 and Q12 were run on SF10 with scripted equivalents of
 the steps below (see "Observed so far"). The other engines are in `../clickhouse/`, `../whpg/`
 and `../monetdb/`.
 
@@ -34,11 +34,11 @@ sudo chown -R ubuntu:ubuntu /data
 ## 3. Generate TPC-H data
 
 ```bash
-docker run --rm -v /data/tpch:/out ghcr.io/jsc0218/tpchgen:latest -s 1 --output-dir /out
+docker run --rm -v /data/tpch:/out ghcr.io/jsc0218/tpchgen:latest -s 10 --output-dir /out
 ls -lh /data/tpch
 ```
 
-`-s 1` is scale factor 1 (about 1 GB). The files are pipe-delimited `.tbl` with a trailing `|`.
+`-s 10` is scale factor 10 (about 11 GB). The files are pipe-delimited `.tbl` with a trailing `|`.
 
 ## 4. Start PostgreSQL 18
 
@@ -74,16 +74,12 @@ a separate data directory per major version. The 18 image keeps its data in
 Q12's parallel hash join then fails with `could not resize shared memory segment ... No space
 left on device`. Q6 does not need it, so the problem only shows up on the join.
 
-To run a larger scale factor, generate it into its own directory (`-s 10` into `/data/tpch10`)
-and mount that directory at `/data/tpch` of a container with its own data directory, so that
-`load.sql` stays unchanged.
-
 ## 5. Create tables and load
 
 ```bash
 docker exec -i pg18 psql -U postgres < postgres/schema.sql
 docker exec -i pg18 psql -U postgres < postgres/load.sql
-docker exec -it pg18 psql -U postgres -c "SELECT count(*) FROM lineitem"   # SF1: 6001215
+docker exec -it pg18 psql -U postgres -c "SELECT count(*) FROM lineitem"   # SF10: 59986052
 ```
 
 ## 6. Run Q6
@@ -92,8 +88,7 @@ docker exec -it pg18 psql -U postgres -c "SELECT count(*) FROM lineitem"   # SF1
 docker exec -i pg18 psql -U postgres -c '\timing on' -f - < postgres/queries/q6.sql
 ```
 
-At SF1 with the standard parameters the result should be `123141078.2283` (SF10:
-`1230113636.0101`). Run each query several times and keep the median; the first run is cold.
+At SF10 with the standard parameters the result should be `1230113636.0101`. Run each query several times and keep the median; the first run is cold.
 
 ## 7. Run Q12
 
@@ -101,17 +96,16 @@ At SF1 with the standard parameters the result should be `123141078.2283` (SF10:
 docker exec -i pg18 psql -U postgres -c '\timing on' -f - < postgres/queries/q12.sql
 ```
 
-Q12 is a join of `orders` and `lineitem`. At SF1 the result is MAIL 6202 9324 and SHIP 6200 9262
-(SF10: MAIL 62071 93045, SHIP 62426 93261).
+Q12 is a join of `orders` and `lineitem`. At SF10 the result is MAIL 62071 93045 and SHIP 62426 93261.
 
 ## Observed so far (not a benchmark)
 
-| | SF1 | SF10 |
-|---|---|---|
-| Load (all tables, `load.sql`) | 40.7 s | 305 s |
-| Q6, median of 5 | 115 ms | 831 ms |
-| Q12, median of 5 | 225 ms | 2174 ms |
-| Database size | 1.45 GB | 14.39 GB |
+| | SF10 |
+|---|---|
+| Load (all tables, `load.sql`) | 132 s |
+| Q6, median of 5 | 777 ms |
+| Q12, median of 5 | 2091 ms |
+| Database size | 14.39 GB |
 
 With the settings above, one session, warm cache. The comparison with the other engines is in the
 [root README](../README.md#results-sf1-and-sf10-q6-and-q12-not-a-benchmark).

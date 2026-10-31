@@ -1,5 +1,5 @@
 -- TPC-H Q6 with the standard validation parameters (DATE=1994-01-01, DISCOUNT=0.06, QUANTITY=24).
--- Expected result at SF1: 123141078.2283
+-- Expected result at SF10: 1230113636.0101
 -- The discount bounds are written as literals on purpose: in ClickHouse `0.06 + 0.01` is a
 -- Float64 equal to 0.06999999999999999, which drops every row with l_discount = 0.07 and
 -- gives 75207768.1855 instead.

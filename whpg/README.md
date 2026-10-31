@@ -2,11 +2,11 @@
 
 Steps to run TPC-H against WarehousePG 7 in Docker on the same EC2 host as the PostgreSQL and
 ClickHouse runs (see `../postgres/README.md` and `../clickhouse/README.md`). Status: every step
-below was run on SF1 and SF10 with 16 segments and no mirror (Ubuntu, x86_64, 32 vCPUs = 16 cores
+below was run on SF10 with 16 segments and no mirror (Ubuntu, x86_64, 32 vCPUs = 16 cores
 with hyperthreading, 61 GB RAM). The other engines are in `../postgres/`, `../clickhouse/` and
 `../monetdb/`.
 
-Assumes Docker is installed and the SF1 files are already in `/data/tpch` (see
+Assumes Docker is installed and the SF10 files are already in `/data/tpch` (see
 `../postgres/README.md`, steps 1 to 3). Run the commands from the repository root.
 
 ## 1. Stop the other engines
@@ -52,7 +52,7 @@ docker logs -f whpg      # wait for "[whpg-bootstrap] bootstrap complete" (about
 - `WHPG_ROLE=coordinator` is required. Without it the container starts as a segment and creates
   no database.
 - `WHPG_SEGMENTS_PER_HOST` is the number of primary segments; 16 was used on a 32 vCPU host.
-  `WHPG_MIRRORS=off` leaves out the mirror: with one segment it cut the SF1 load from 67 s to 30 s.
+  `WHPG_MIRRORS=off` leaves out the mirror: with one segment it cut an SF1 load from 67 s to 30 s.
 - `--hostname cdw`, the `ping_group_range` sysctl, `--shm-size` and `--ulimit` are the settings
   the image's own validation uses. `--stop-timeout 60` is needed because a clean stop takes about
   12 s and Docker's default grace period is 10 s.
@@ -85,10 +85,10 @@ Server-side `COPY` runs as one stream on the coordinator, which then distributes
 
 ```bash
 docker exec -i whpg su - gpadmin -c "psql -d postgres -v ON_ERROR_STOP=1 -f -" < whpg/load.sql
-docker exec whpg su - gpadmin -c "psql -d postgres -c 'SELECT count(*) FROM lineitem'"   # SF1: 6001215
+docker exec whpg su - gpadmin -c "psql -d postgres -c 'SELECT count(*) FROM lineitem'"   # SF10: 59986052
 ```
 
-All eight tables took about 14 s. That single stream is the bottleneck at larger scale factors;
+All eight tables took about 64 s. That single stream is the bottleneck at larger scale factors;
 loading through `gpfdist` external tables would spread it and has not been tried here.
 
 ## 5. Run Q6
@@ -97,7 +97,7 @@ loading through `gpfdist` external tables would spread it and has not been tried
 docker exec -i whpg su - gpadmin -c "psql -d postgres -c '\timing on' -f -" < whpg/queries/q6.sql
 ```
 
-Expect `123141078.2283` (SF10: `1230113636.0101`). Median over 5 runs:
+Expect `1230113636.0101`. Median over 5 runs:
 
 ```bash
 for i in 1 2 3 4 5; do
@@ -112,11 +112,8 @@ docker exec -i whpg su - gpadmin -c "psql -d postgres -c '\timing on' -f -" < wh
 ```
 
 Q12 is a join of `orders` and `lineitem`. Both tables are distributed on the order key, so each
-segment joins its own rows and the plan has no data motion before the join. At SF1 the result is
-MAIL 6202 9324 and SHIP 6200 9262 (SF10: MAIL 62071 93045, SHIP 62426 93261).
-
-To run SF10, start a second cluster the same way, with its own data directory, `-v
-/data/tpch10:/data/tpch:ro` instead of the SF1 mount, and a different name and published port.
+segment joins its own rows and the plan has no data motion before the join. At SF10 the result is
+MAIL 62071 93045 and SHIP 62426 93261.
 
 ## Restart
 
@@ -126,12 +123,12 @@ again. After a restart `lineitem` still had 6001215 rows and Q6 gave the same re
 
 ## Observed so far (16 segments, no mirror, not a benchmark)
 
-| | SF1 | SF10 |
-|---|---|---|
-| Load (all tables, `load.sql`) | 14.1 s | 90 s |
-| Q6, median of 5 | 66 ms | 380 ms |
-| Q12, median of 5 | 100 ms | 531 ms |
-| Database size (all segments) | 0.29 GB | 2.88 GB |
+| | SF10 |
+|---|---|
+| Load (all tables, `load.sql`) | 63.8 s |
+| Q6, median of 5 | 402 ms |
+| Q12, median of 5 | 554 ms |
+| Database size (all segments) | 2.88 GB |
 
 Untuned: `shared_buffers` and `statement_mem` are 125 MB, ORCA is on. The comparison with the other engines is in the
 [root README](../README.md#results-sf1-and-sf10-q6-and-q12-not-a-benchmark).
@@ -148,7 +145,8 @@ sudo rm -rf /data/whpg      # deletes the database files
 
 - `latest` is the newest plain `main` build of the image, which can be weeks old. The server
   reports `7.0.0-beta.0 build dev` with no commit, so pin the image digest and record it with any
-  results.
+  results. The numbers above are from digest
+  `sha256:8bedf6ff77d28d5e936eae3dec35fa35da54aa76f6fa54dd5e7cb5febf38d70e`.
 - No indexes and no tuning; record the distribution keys and any settings with results.
 - Tuning was tried on SF10 (on plain heap tables, before the switch to column storage) and left out. Raising `statement_mem` to 1 GB changed nothing: the
   Q12 hash table is built on the filtered `lineitem` rows (about 10,000 per segment), uses 1.5 MB
@@ -158,7 +156,8 @@ sudo rm -rf /data/whpg      # deletes the database files
 - Primary keys on `orders` and `lineitem` plus single-column date indexes (within the TPC-H
   rules) made Q6 and Q12 slower on SF10 (heap tables) (ORCA chose index scans on the date columns); they were
   dropped again.
-- Database size is the sum of `pg_total_relation_size` over the tables on all segments (the small
-  append-optimized bookkeeping tables are not counted). The data directories are larger because
+- Database size is the sum of `sotdsize + sotdtoastsize + sotdadditionalsize` in
+  `gp_toolkit.gp_size_of_table_disk` over the tables on all segments (the small append-optimized
+  bookkeeping tables are not counted). The data directories are larger because
   every segment keeps its own recycled WAL.
 - Results are TPC-H-derived, not comparable to official TPC Benchmark Results.
