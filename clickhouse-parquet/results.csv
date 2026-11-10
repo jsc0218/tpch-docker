@@ -1,0 +1,11 @@
+panel,mode,value,label
+Q6,Local Parquet (warm),109,109 ms
+Q6,"S3 no cache, 4 MiB seek (default)",2970,2970 ms
+Q6,"S3 no cache, 1 MiB seek",861,861 ms
+Q6,"S3 cache on, 4 MiB seek (default)",262,262 ms
+Q6,"S3 cache on, 1 MiB seek",153,153 ms
+Q12,Local Parquet (warm),338,338 ms
+Q12,"S3 no cache, 4 MiB seek (default)",5990,5990 ms
+Q12,"S3 no cache, 1 MiB seek",2896,2896 ms
+Q12,"S3 cache on, 4 MiB seek (default)",501,501 ms
+Q12,"S3 cache on, 1 MiB seek",403,403 ms

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 494" width="900" height="494" role="img" aria-labelledby="t d" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+<title id="t">ClickHouse 26.8 on TPC-H SF10 Parquet, lower is better</title>
+<desc id="d">One host; median of 5 runs (3 for S3 no cache, 1 MiB seek); cache-on runs follow a filling run. Q6 query time (scan): Local Parquet (warm) 109 ms, S3 no cache, 4 MiB seek (default) 2970 ms, S3 no cache, 1 MiB seek 861 ms, S3 cache on, 4 MiB seek (default) 262 ms, S3 cache on, 1 MiB seek 153 ms; Q12 query time (join): Local Parquet (warm) 338 ms, S3 no cache, 4 MiB seek (default) 5990 ms, S3 no cache, 1 MiB seek 2896 ms, S3 cache on, 4 MiB seek (default) 501 ms, S3 cache on, 1 MiB seek 403 ms.</desc>
+<rect width="900" height="494" fill="#fcfcfb"/>
+<text x="24" y="34" font-size="17" font-weight="700" fill="#0b0b0b">ClickHouse 26.8 on TPC-H SF10 Parquet, lower is better</text>
+<text x="24" y="55" font-size="12" fill="#52514e">One host; median of 5 runs (3 for S3 no cache, 1 MiB seek); cache-on runs follow a filling run</text>
+<text x="24" y="90" font-size="13" font-weight="600" fill="#0b0b0b">Q6 query time (scan)</text>
+<text x="265.0" y="258" font-size="11" text-anchor="middle" fill="#898781">0 ms</text>
+<line x1="353.5" y1="102" x2="353.5" y2="242" stroke="#e1e0d9" stroke-width="1"/>
+<text x="353.5" y="258" font-size="11" text-anchor="middle" fill="#898781">500 ms</text>
+<line x1="442.0" y1="102" x2="442.0" y2="242" stroke="#e1e0d9" stroke-width="1"/>
+<text x="442.0" y="258" font-size="11" text-anchor="middle" fill="#898781">1000 ms</text>
+<line x1="530.5" y1="102" x2="530.5" y2="242" stroke="#e1e0d9" stroke-width="1"/>
+<text x="530.5" y="258" font-size="11" text-anchor="middle" fill="#898781">1500 ms</text>
+<line x1="619.0" y1="102" x2="619.0" y2="242" stroke="#e1e0d9" stroke-width="1"/>
+<text x="619.0" y="258" font-size="11" text-anchor="middle" fill="#898781">2000 ms</text>
+<line x1="707.5" y1="102" x2="707.5" y2="242" stroke="#e1e0d9" stroke-width="1"/>
+<text x="707.5" y="258" font-size="11" text-anchor="middle" fill="#898781">2500 ms</text>
+<line x1="796.0" y1="102" x2="796.0" y2="242" stroke="#e1e0d9" stroke-width="1"/>
+<text x="796.0" y="258" font-size="11" text-anchor="middle" fill="#898781">3000 ms</text>
+<line x1="265.0" y1="102" x2="265.0" y2="242" stroke="#c3c2b7" stroke-width="1"/>
+<path d="M265.0,107.0 h15.3 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-15.3 z" fill="#1baf7a"/>
+<text x="259" y="120.0" font-size="12" text-anchor="end" fill="#52514e">Local Parquet (warm)</text>
+<text x="291.3" y="120.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">109 ms</text>
+<path d="M265.0,135.0 h521.7 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-521.7 z" fill="#eb6834"/>
+<text x="259" y="148.0" font-size="12" text-anchor="end" fill="#52514e">S3 no cache, 4 MiB seek (default)</text>
+<text x="797.7" y="148.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">2970 ms</text>
+<path d="M265.0,163.0 h148.4 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-148.4 z" fill="#eda100"/>
+<text x="259" y="176.0" font-size="12" text-anchor="end" fill="#52514e">S3 no cache, 1 MiB seek</text>
+<text x="424.4" y="176.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">861 ms</text>
+<path d="M265.0,191.0 h42.4 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-42.4 z" fill="#2a78d6"/>
+<text x="259" y="204.0" font-size="12" text-anchor="end" fill="#52514e">S3 cache on, 4 MiB seek (default)</text>
+<text x="318.4" y="204.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">262 ms</text>
+<path d="M265.0,219.0 h23.1 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-23.1 z" fill="#7b61c9"/>
+<text x="259" y="232.0" font-size="12" text-anchor="end" fill="#52514e">S3 cache on, 1 MiB seek</text>
+<text x="299.1" y="232.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">153 ms</text>
+<text x="24" y="302" font-size="13" font-weight="600" fill="#0b0b0b">Q12 query time (join)</text>
+<text x="265.0" y="470" font-size="11" text-anchor="middle" fill="#898781">0 ms</text>
+<line x1="353.5" y1="314" x2="353.5" y2="454" stroke="#e1e0d9" stroke-width="1"/>
+<text x="353.5" y="470" font-size="11" text-anchor="middle" fill="#898781">1000 ms</text>
+<line x1="442.0" y1="314" x2="442.0" y2="454" stroke="#e1e0d9" stroke-width="1"/>
+<text x="442.0" y="470" font-size="11" text-anchor="middle" fill="#898781">2000 ms</text>
+<line x1="530.5" y1="314" x2="530.5" y2="454" stroke="#e1e0d9" stroke-width="1"/>
+<text x="530.5" y="470" font-size="11" text-anchor="middle" fill="#898781">3000 ms</text>
+<line x1="619.0" y1="314" x2="619.0" y2="454" stroke="#e1e0d9" stroke-width="1"/>
+<text x="619.0" y="470" font-size="11" text-anchor="middle" fill="#898781">4000 ms</text>
+<line x1="707.5" y1="314" x2="707.5" y2="454" stroke="#e1e0d9" stroke-width="1"/>
+<text x="707.5" y="470" font-size="11" text-anchor="middle" fill="#898781">5000 ms</text>
+<line x1="796.0" y1="314" x2="796.0" y2="454" stroke="#e1e0d9" stroke-width="1"/>
+<text x="796.0" y="470" font-size="11" text-anchor="middle" fill="#898781">6000 ms</text>
+<line x1="265.0" y1="314" x2="265.0" y2="454" stroke="#c3c2b7" stroke-width="1"/>
+<path d="M265.0,319.0 h25.9 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-25.9 z" fill="#1baf7a"/>
+<text x="259" y="332.0" font-size="12" text-anchor="end" fill="#52514e">Local Parquet (warm)</text>
+<text x="301.9" y="332.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">338 ms</text>
+<path d="M265.0,347.0 h526.1 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-526.1 z" fill="#eb6834"/>
+<text x="259" y="360.0" font-size="12" text-anchor="end" fill="#52514e">S3 no cache, 4 MiB seek (default)</text>
+<text x="802.1" y="360.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">5990 ms</text>
+<path d="M265.0,375.0 h252.3 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-252.3 z" fill="#eda100"/>
+<text x="259" y="388.0" font-size="12" text-anchor="end" fill="#52514e">S3 no cache, 1 MiB seek</text>
+<text x="528.3" y="388.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">2896 ms</text>
+<path d="M265.0,403.0 h40.3 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-40.3 z" fill="#2a78d6"/>
+<text x="259" y="416.0" font-size="12" text-anchor="end" fill="#52514e">S3 cache on, 4 MiB seek (default)</text>
+<text x="316.3" y="416.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">501 ms</text>
+<path d="M265.0,431.0 h31.7 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-31.7 z" fill="#7b61c9"/>
+<text x="259" y="444.0" font-size="12" text-anchor="end" fill="#52514e">S3 cache on, 1 MiB seek</text>
+<text x="307.7" y="444.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">403 ms</text>
+</svg>
