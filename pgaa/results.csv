@@ -1,0 +1,11 @@
+panel,mode,value,label
+Q6,"pgaa, cache off",790,790 ms
+Q6,"pgaa, cache 1 GiB (default)",840,840 ms
+Q6,"pgaa, cache 10 GiB",199,199 ms
+Q6,"ClickHouse, no cache, 1 MiB seek",895,895 ms
+Q6,"ClickHouse, 10 GiB cache, 1 MiB seek",153,153 ms
+Q12,"pgaa, cache off",1053,1053 ms
+Q12,"pgaa, cache 1 GiB (default)",2063,2063 ms
+Q12,"pgaa, cache 10 GiB",341,341 ms
+Q12,"ClickHouse, no cache, 1 MiB seek",2712,2712 ms
+Q12,"ClickHouse, 10 GiB cache, 1 MiB seek",403,403 ms

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 494" width="900" height="494" role="img" aria-labelledby="t d" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+<title id="t">pgaa 1.12 and ClickHouse on TPC-H SF10 Parquet in S3, lower is better</title>
+<desc id="d">Same host and data; one connection, median of runs 2 to 6 (run 1 is the cold one). Q6 query time (scan): pgaa, cache off 790 ms, pgaa, cache 1 GiB (default) 840 ms, pgaa, cache 10 GiB 199 ms, ClickHouse, no cache, 1 MiB seek 895 ms, ClickHouse, 10 GiB cache, 1 MiB seek 153 ms; Q12 query time (join): pgaa, cache off 1053 ms, pgaa, cache 1 GiB (default) 2063 ms, pgaa, cache 10 GiB 341 ms, ClickHouse, no cache, 1 MiB seek 2712 ms, ClickHouse, 10 GiB cache, 1 MiB seek 403 ms.</desc>
+<rect width="900" height="494" fill="#fcfcfb"/>
+<text x="24" y="34" font-size="17" font-weight="700" fill="#0b0b0b">pgaa 1.12 and ClickHouse on TPC-H SF10 Parquet in S3, lower is better</text>
+<text x="24" y="55" font-size="12" fill="#52514e">Same host and data; one connection, median of runs 2 to 6 (run 1 is the cold one)</text>
+<text x="24" y="90" font-size="13" font-weight="600" fill="#0b0b0b">Q6 query time (scan)</text>
+<text x="295.0" y="258" font-size="11" text-anchor="middle" fill="#898781">0 ms</text>
+<line x1="395.2" y1="102" x2="395.2" y2="242" stroke="#e1e0d9" stroke-width="1"/>
+<text x="395.2" y="258" font-size="11" text-anchor="middle" fill="#898781">200 ms</text>
+<line x1="495.4" y1="102" x2="495.4" y2="242" stroke="#e1e0d9" stroke-width="1"/>
+<text x="495.4" y="258" font-size="11" text-anchor="middle" fill="#898781">400 ms</text>
+<line x1="595.6" y1="102" x2="595.6" y2="242" stroke="#e1e0d9" stroke-width="1"/>
+<text x="595.6" y="258" font-size="11" text-anchor="middle" fill="#898781">600 ms</text>
+<line x1="695.8" y1="102" x2="695.8" y2="242" stroke="#e1e0d9" stroke-width="1"/>
+<text x="695.8" y="258" font-size="11" text-anchor="middle" fill="#898781">800 ms</text>
+<line x1="796.0" y1="102" x2="796.0" y2="242" stroke="#e1e0d9" stroke-width="1"/>
+<text x="796.0" y="258" font-size="11" text-anchor="middle" fill="#898781">1000 ms</text>
+<line x1="295.0" y1="102" x2="295.0" y2="242" stroke="#c3c2b7" stroke-width="1"/>
+<path d="M295.0,107.0 h391.8 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-391.8 z" fill="#eb6834"/>
+<text x="289" y="120.0" font-size="12" text-anchor="end" fill="#52514e">pgaa, cache off</text>
+<text x="697.8" y="120.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">790 ms</text>
+<path d="M295.0,135.0 h416.8 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-416.8 z" fill="#eda100"/>
+<text x="289" y="148.0" font-size="12" text-anchor="end" fill="#52514e">pgaa, cache 1 GiB (default)</text>
+<text x="722.8" y="148.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">840 ms</text>
+<path d="M295.0,163.0 h95.7 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-95.7 z" fill="#2a78d6"/>
+<text x="289" y="176.0" font-size="12" text-anchor="end" fill="#52514e">pgaa, cache 10 GiB</text>
+<text x="401.7" y="176.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">199 ms</text>
+<path d="M295.0,191.0 h444.4 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-444.4 z" fill="#8a5cc2"/>
+<text x="289" y="204.0" font-size="12" text-anchor="end" fill="#52514e">ClickHouse, no cache, 1 MiB seek</text>
+<text x="750.4" y="204.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">895 ms</text>
+<path d="M295.0,219.0 h72.7 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-72.7 z" fill="#2f9e6e"/>
+<text x="289" y="232.0" font-size="12" text-anchor="end" fill="#52514e">ClickHouse, 10 GiB cache, 1 MiB seek</text>
+<text x="378.7" y="232.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">153 ms</text>
+<text x="24" y="302" font-size="13" font-weight="600" fill="#0b0b0b">Q12 query time (join)</text>
+<text x="295.0" y="470" font-size="11" text-anchor="middle" fill="#898781">0 ms</text>
+<line x1="378.5" y1="314" x2="378.5" y2="454" stroke="#e1e0d9" stroke-width="1"/>
+<text x="378.5" y="470" font-size="11" text-anchor="middle" fill="#898781">500 ms</text>
+<line x1="462.0" y1="314" x2="462.0" y2="454" stroke="#e1e0d9" stroke-width="1"/>
+<text x="462.0" y="470" font-size="11" text-anchor="middle" fill="#898781">1000 ms</text>
+<line x1="545.5" y1="314" x2="545.5" y2="454" stroke="#e1e0d9" stroke-width="1"/>
+<text x="545.5" y="470" font-size="11" text-anchor="middle" fill="#898781">1500 ms</text>
+<line x1="629.0" y1="314" x2="629.0" y2="454" stroke="#e1e0d9" stroke-width="1"/>
+<text x="629.0" y="470" font-size="11" text-anchor="middle" fill="#898781">2000 ms</text>
+<line x1="712.5" y1="314" x2="712.5" y2="454" stroke="#e1e0d9" stroke-width="1"/>
+<text x="712.5" y="470" font-size="11" text-anchor="middle" fill="#898781">2500 ms</text>
+<line x1="796.0" y1="314" x2="796.0" y2="454" stroke="#e1e0d9" stroke-width="1"/>
+<text x="796.0" y="470" font-size="11" text-anchor="middle" fill="#898781">3000 ms</text>
+<line x1="295.0" y1="314" x2="295.0" y2="454" stroke="#c3c2b7" stroke-width="1"/>
+<path d="M295.0,319.0 h171.9 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-171.9 z" fill="#eb6834"/>
+<text x="289" y="332.0" font-size="12" text-anchor="end" fill="#52514e">pgaa, cache off</text>
+<text x="477.9" y="332.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">1053 ms</text>
+<path d="M295.0,347.0 h340.5 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-340.5 z" fill="#eda100"/>
+<text x="289" y="360.0" font-size="12" text-anchor="end" fill="#52514e">pgaa, cache 1 GiB (default)</text>
+<text x="646.5" y="360.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">2063 ms</text>
+<path d="M295.0,375.0 h52.9 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-52.9 z" fill="#2a78d6"/>
+<text x="289" y="388.0" font-size="12" text-anchor="end" fill="#52514e">pgaa, cache 10 GiB</text>
+<text x="358.9" y="388.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">341 ms</text>
+<path d="M295.0,403.0 h448.9 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-448.9 z" fill="#8a5cc2"/>
+<text x="289" y="416.0" font-size="12" text-anchor="end" fill="#52514e">ClickHouse, no cache, 1 MiB seek</text>
+<text x="754.9" y="416.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">2712 ms</text>
+<path d="M295.0,431.0 h63.3 a4.0,4.0 0 0 1 4.0,4.0 v10.0 a4.0,4.0 0 0 1 -4.0,4.0 h-63.3 z" fill="#2f9e6e"/>
+<text x="289" y="444.0" font-size="12" text-anchor="end" fill="#52514e">ClickHouse, 10 GiB cache, 1 MiB seek</text>
+<text x="369.3" y="444.0" font-size="12" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="4" stroke-linejoin="round" paint-order="stroke">403 ms</text>
+</svg>
