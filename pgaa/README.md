@@ -59,33 +59,33 @@ answers at SF10: Q6 `1230113636.0101`; Q12 MAIL 62071 93045 and SHIP 62426 93261
 
 ## Observed so far (not a benchmark)
 
-S3 in the same region, one session. Each configuration is a fresh container, then the query six
+S3 in the same region, one session, with `postgresql-18-pgaa` 1.11.0 (a CI snapshot build) and `pgfs` 3.2.1. Each configuration is a fresh container, then the query six
 times on one `psql` connection; the table gives run 1 (cold) and the median of runs 2 to 6. The only
 setting changed is Seafowl's object-store cache (`pgaa.autostart_seafowl_enable_object_store_cache`,
 `pgaa.autostart_seafowl_object_store_cache_capacity_mb`):
 
 | Seafowl object-store cache | Q6 first run | Q6 | Q12 first run | Q12 |
 |---|---|---|---|---|
-| off | 2273 ms | 790 ms | 1811 ms | 1053 ms |
-| on, 1 GiB (default) | 1455 ms | 840 ms | 2000 ms | 2063 ms |
-| on, 10 GiB | 1310 ms | 199 ms | 1893 ms | 341 ms |
+| off | 1369 ms | 873 ms | 1587 ms | 1446 ms |
+| on, 1 GiB (default) | 2352 ms | 874 ms | 2056 ms | 1805 ms |
+| on, 10 GiB | 1401 ms | 230 ms | 1560 ms | 369 ms |
 
 For comparison, ClickHouse on the same files with `remote_read_min_bytes_for_seek` set to 1 MiB (its
-best setting here; the default 4 MiB gives Q6 2980 / 262 ms and Q12 5532 / 501 ms without / with the
+best setting here; the default 4 MiB gives Q6 3109 / 253 ms and Q12 5363 / 550 ms without / with the
 10 GiB cache), median of runs 2 to 6 on one connection:
 
 | ClickHouse | Q6 | Q12 |
 |---|---|---|
-| no cache, 1 MiB seek | 895 ms | 2712 ms |
-| 10 GiB cache, 1 MiB seek | 153 ms | 403 ms |
+| no cache, 1 MiB seek | 1150 ms | 2853 ms |
+| 10 GiB cache, 1 MiB seek | 166 ms | 439 ms |
 
-<img alt="Bar charts of pgaa and ClickHouse on SF10 Parquet in S3, lower is better. Q6 time: pgaa cache off 790 ms, cache 1 GiB (default) 840 ms, cache 10 GiB 199 ms; ClickHouse no cache 895 ms, 10 GiB cache 153 ms. Q12 time: pgaa 1053, 2063 and 341 ms; ClickHouse 2712 and 403 ms. The tables hold the same values." src="sf10.svg">
+<img alt="Bar charts of pgaa and ClickHouse on SF10 Parquet in S3, lower is better. Q6 time: pgaa cache off 873 ms, cache 1 GiB (default) 874 ms, cache 10 GiB 230 ms; ClickHouse no cache 1150 ms, 10 GiB cache 166 ms. Q12 time: pgaa 1446, 1805 and 369 ms; ClickHouse 2853 and 439 ms. The tables hold the same values." src="sf10.svg">
 
 Drawn from [`results.csv`](results.csv) by `python3 pgaa/make_chart.py` (standard library only). The
 chart has one linear axis per panel, so bar lengths compare within a panel but not between panels.
 
 The default 1 GiB cache is smaller than `lineitem` (2.4 GiB), so it keeps evicting and is no better
-than no cache (Q12 is twice as slow); 10 GiB holds all eight tables. The ClickHouse setup is in
+than no cache (Q12 is about 1.25 times as slow); 10 GiB holds all eight tables. The ClickHouse setup is in
 [`../clickhouse-parquet/`](../clickhouse-parquet/README.md).
 
 The numbers are for a connection that is already open. The first query on a new connection costs

@@ -54,8 +54,8 @@ docker logs -f whpg      # wait for "[whpg-bootstrap] bootstrap complete" (about
 - `WHPG_SEGMENTS_PER_HOST` is the number of primary segments; 16 was used on a 32 vCPU host.
   `WHPG_MIRRORS=off` leaves out the mirror: with one segment it cut an SF1 load from 67 s to 30 s.
 - `--hostname cdw`, the `ping_group_range` sysctl, `--shm-size` and `--ulimit` are the settings
-  the image's own validation uses. `--stop-timeout 60` is needed because a clean stop takes about
-  12 s and Docker's default grace period is 10 s.
+  the image's own validation uses. `--stop-timeout 60` leaves a clean stop room beyond Docker's default
+  10 s grace period (a stop took about 3 s in the latest run and about 12 s in an earlier one).
 - `/data/whpg` holds the database files. Mounting `/data/tpch` under it also leaves an empty
   root-owned `tpch` directory in `/data/whpg`.
 - The role is `gpadmin` and there is no password. Do not expose port 5432 beyond the host.
@@ -118,16 +118,16 @@ MAIL 62071 93045 and SHIP 62426 93261.
 ## Restart
 
 `docker stop whpg` then `docker start whpg` keeps the data: the bootstrap detects the existing
-cluster and starts it (a stop took about 12 s). Wait for `bootstrap complete` in `docker logs`
+cluster and starts it (a stop took about 3 s). Wait for `bootstrap complete` in `docker logs`
 again. After a restart `lineitem` still had all its rows (6001215 at SF1, when this was checked) and Q6 gave the same result.
 
 ## Observed so far (16 segments, no mirror, not a benchmark)
 
 | | SF10 |
 |---|---|
-| Load (all tables, `load.sql`) | 63.8 s |
-| Q6, median of 5 | 402 ms |
-| Q12, median of 5 | 554 ms |
+| Load (all tables, `load.sql`) | 78.0 s |
+| Q6, median of 5 | 484 ms |
+| Q12, median of 5 | 694 ms |
 | Database size (all segments) | 2.88 GB |
 
 Untuned: `shared_buffers` and `statement_mem` are 125 MB, ORCA is on. The comparison with the other engines is in the

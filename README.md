@@ -51,17 +51,17 @@ One EC2 host (Ubuntu, x86_64, 32 vCPUs = 16 cores with hyperthreading, 61 GB RAM
 running at a time, median of 5 warm runs in one session. Every engine returns the same answers:
 Q6 is `1230113636.0101` and Q12 gives the same rows (MAIL 62071 93045, SHIP 62426 93261).
 
-<img alt="Bar charts of the SF10 results, lower is better. Q6 time: MonetDB 17.7 ms, ClickHouse 72 ms, WarehousePG 402 ms, PostgreSQL 777 ms. Q12 time: 44.8, 113, 554 and 2091 ms. Load time: 37.4, 13.6, 63.8 and 132 s. Database size: 9.11, 4.65, 2.88 and 14.39 GB (raw files 11.23 GB). The tables below hold the same values." src="charts/sf10.svg">
+<img alt="Bar charts of the SF10 results, lower is better. Q6 time: MonetDB 19.7 ms, ClickHouse 94 ms, WarehousePG 484 ms, PostgreSQL 916 ms. Q12 time: 44.7, 145, 694 and 2329 ms. Load time: 39.0, 13.5, 78.0 and 178 s. Database size: 9.11, 4.65, 2.88 and 14.39 GB (raw files 11.23 GB). The tables below hold the same values." src="charts/sf10.svg">
 
 The chart has one linear axis per panel, so bar lengths compare within a panel but not between panels. It is drawn from [`charts/results.csv`](charts/results.csv) by
 `python3 charts/make_charts.py` (standard library only).
 
 | Engine | Load | Q6 | Q12 |
 |---|---|---|---|
-| MonetDB 11.55.7 (Dec2025-SP3) | 37.4 s | 17.7 ms | 44.8 ms |
-| ClickHouse 26.8 | 13.6 s | 72 ms | 113 ms |
-| WarehousePG 7 (16 segments, no mirror, AO column zstd) | 63.8 s | 402 ms | 554 ms |
-| PostgreSQL 18.6 | 132 s | 777 ms | 2091 ms |
+| MonetDB 11.55.7 (Dec2025-SP3) | 39.0 s | 19.7 ms | 44.7 ms |
+| ClickHouse 26.8 | 13.5 s | 94 ms | 145 ms |
+| WarehousePG 7 (16 segments, no mirror, AO column zstd) | 78.0 s | 484 ms | 694 ms |
+| PostgreSQL 18.6 | 178 s | 916 ms | 2329 ms |
 
 Database size (not the data directory, which also holds WAL and logs):
 
