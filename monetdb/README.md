@@ -95,7 +95,7 @@ Q12 is a join of `orders` and `lineitem`. At SF10 the result is MAIL 62071 93045
 
 Server defaults (32 worker threads, about 54 GB of memory chosen by the server), one session,
 warm cache. The comparison with the other engines is in the
-[root README](../README.md#results-sf1-and-sf10-q6-and-q12-not-a-benchmark).
+[root README](../README.md#results-sf10-q6-and-q12-not-a-benchmark).
 
 ## Removing things
 

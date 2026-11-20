@@ -119,7 +119,7 @@ MAIL 62071 93045 and SHIP 62426 93261.
 
 `docker stop whpg` then `docker start whpg` keeps the data: the bootstrap detects the existing
 cluster and starts it (a stop took about 12 s). Wait for `bootstrap complete` in `docker logs`
-again. After a restart `lineitem` still had 6001215 rows and Q6 gave the same result.
+again. After a restart `lineitem` still had all its rows (6001215 at SF1, when this was checked) and Q6 gave the same result.
 
 ## Observed so far (16 segments, no mirror, not a benchmark)
 
@@ -131,7 +131,7 @@ again. After a restart `lineitem` still had 6001215 rows and Q6 gave the same re
 | Database size (all segments) | 2.88 GB |
 
 Untuned: `shared_buffers` and `statement_mem` are 125 MB, ORCA is on. The comparison with the other engines is in the
-[root README](../README.md#results-sf1-and-sf10-q6-and-q12-not-a-benchmark).
+[root README](../README.md#results-sf10-q6-and-q12-not-a-benchmark).
 
 ## Removing things
 

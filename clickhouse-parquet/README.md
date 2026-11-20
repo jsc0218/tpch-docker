@@ -20,7 +20,7 @@ docker stop pg18 whpg mdb ch 2>/dev/null || true      # whichever of the other e
 ```bash
 sudo mkdir -p /data/tpch-parquet && sudo chown ubuntu:ubuntu /data/tpch-parquet
 docker run --rm -v /data/tpch-parquet:/out ghcr.io/jsc0218/tpchgen:latest parquet -s 10 --output-dir /out
-ls -lh /data/tpch-parquet      # one <table>.parquet per table, 3.7 GB in total
+ls -lh /data/tpch-parquet      # one <table>.parquet per table; 3.9 GB in total (`ls -lh` shows 3.7G, in GiB)
 ```
 
 ## 3. Start ClickHouse with the files mounted
@@ -82,7 +82,7 @@ The same Parquet files can be queried from S3. The bucket must be in the same re
 host (here `us-east-1`), and the instance role needs read access.
 
 ```bash
-aws s3 sync /data/tpch-parquet s3://<bucket>/tpch-parquet/sf10/      # 3.6 GiB, 8 objects, about 7 s
+aws s3 sync /data/tpch-parquet s3://<bucket>/tpch-parquet/sf10/      # 3.65 GiB (3.9 GB), 8 objects, about 7 s
 
 sudo mkdir -p /data/chs3 && sudo chown ubuntu:ubuntu /data/chs3
 docker run -d --name chs3 --network host --ulimit nofile=262144:262144 \
@@ -153,7 +153,7 @@ between panels.
 | S3, filesystem cache on, default seek setting, median of 5 (after a filling run) | 262 ms | 501 ms |
 | S3, filesystem cache on, 1 MiB seek setting, median of 5 (after a filling run) | 153 ms | 403 ms |
 
-Parquet files on disk: 3.7 GB (3.6 GiB in S3).
+Parquet files on disk: 3.9 GB (3.65 GiB); the same 8 files in S3.
 
 Runs (s): local Q6 0.109 0.106 0.134 0.107 0.110, Q12 0.341 0.333 0.359 0.338 0.334; S3 Q6
 3.37 2.98 2.87 2.97 2.94 (first run 5.28), Q12 6.30 6.27 5.99 5.39 5.37 (first run 8.74); S3 with

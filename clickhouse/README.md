@@ -60,7 +60,7 @@ docker exec -i ch clickhouse-client --time < clickhouse/queries/q6.sql
 ```
 
 Expect `1230113636.0101`, then the elapsed time in seconds
-(0.017 = 17 ms).
+(0.072 = 72 ms).
 
 Median over 5 runs:
 
@@ -96,7 +96,7 @@ trusting its timing.
 | Table size on disk (compressed, active parts) | 4.65 GB |
 
 Server defaults, default compression, one session, warm cache. The comparison with the other
-engines is in the [root README](../README.md#results-sf1-and-sf10-q6-and-q12-not-a-benchmark).
+engines is in the [root README](../README.md#results-sf10-q6-and-q12-not-a-benchmark).
 
 ## Removing things
 
