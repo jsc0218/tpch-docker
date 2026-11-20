@@ -88,9 +88,9 @@ Q12 is a join of `orders` and `lineitem`. At SF10 the result is MAIL 62071 93045
 
 | | SF10 |
 |---|---|
-| Load (all tables, `load.sql`) | 37.4 s |
-| Q6, median of 5 | 17.7 ms |
-| Q12, median of 5 | 44.8 ms |
+| Load (all tables, `load.sql`) | 39.0 s |
+| Q6, median of 5 | 19.7 ms |
+| Q12, median of 5 | 44.7 ms |
 | Database size | 9.11 GB |
 
 Server defaults (32 worker threads, about 54 GB of memory chosen by the server), one session,
