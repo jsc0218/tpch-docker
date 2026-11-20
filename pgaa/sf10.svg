@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 494" width="900" height="494" role="img" aria-labelledby="t d" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
 <title id="t">pgaa and ClickHouse on TPC-H SF10 Parquet in S3, lower is better</title>
-<desc id="d">Same host and data; one connection, median of runs 2 to 6 (run 1 is the cold one). Q6 query time (scan): pgaa, cache off 873 ms, pgaa, cache 1 GiB (default) 874 ms, pgaa, cache 10 GiB 230 ms, ClickHouse, no cache, 1 MiB seek 1150 ms, ClickHouse, 10 GiB cache, 1 MiB seek 166 ms; Q12 query time (join): pgaa, cache off 1446 ms, pgaa, cache 1 GiB (default) 1805 ms, pgaa, cache 10 GiB 369 ms, ClickHouse, no cache, 1 MiB seek 2853 ms, ClickHouse, 10 GiB cache, 1 MiB seek 439 ms.</desc>
+<desc id="d">Same host and data; median of runs 2 to 6 (run 1 is cold); pgaa on one psql connection, ClickHouse one client call per run. Q6 query time (scan): pgaa, cache off 873 ms, pgaa, cache 1 GiB (default) 874 ms, pgaa, cache 10 GiB 230 ms, ClickHouse, no cache, 1 MiB seek 1150 ms, ClickHouse, 10 GiB cache, 1 MiB seek 166 ms; Q12 query time (join): pgaa, cache off 1446 ms, pgaa, cache 1 GiB (default) 1805 ms, pgaa, cache 10 GiB 369 ms, ClickHouse, no cache, 1 MiB seek 2853 ms, ClickHouse, 10 GiB cache, 1 MiB seek 439 ms.</desc>
 <rect width="900" height="494" fill="#fcfcfb"/>
 <text x="24" y="34" font-size="17" font-weight="700" fill="#0b0b0b">pgaa and ClickHouse on TPC-H SF10 Parquet in S3, lower is better</text>
-<text x="24" y="55" font-size="12" fill="#52514e">Same host and data; one connection, median of runs 2 to 6 (run 1 is the cold one)</text>
+<text x="24" y="55" font-size="12" fill="#52514e">Same host and data; median of runs 2 to 6 (run 1 is cold); pgaa on one psql connection, ClickHouse one client call per run</text>
 <text x="24" y="90" font-size="13" font-weight="600" fill="#0b0b0b">Q6 query time (scan)</text>
 <text x="295.0" y="258" font-size="11" text-anchor="middle" fill="#898781">0 ms</text>
 <line x1="378.5" y1="102" x2="378.5" y2="242" stroke="#e1e0d9" stroke-width="1"/>

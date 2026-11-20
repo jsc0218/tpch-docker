@@ -20,8 +20,8 @@ docker stop pg18 ch mdb chpq chs3 pgaa 2>/dev/null || true      # whichever of t
 ## 2. Start WarehousePG
 
 The image is `amd64` only and is a single-host demo cluster, not a production deployment. It is in
-the EnterpriseDB GitHub organisation and an anonymous pull is denied: log in with a GitHub token
-that has `read:packages` (authorise it for the organisation's SSO if asked).
+the EnterpriseDB GitHub organization and an anonymous pull is denied: log in with a GitHub token
+that has `read:packages` (authorize it for the organization's SSO if asked).
 
 ```bash
 echo "$GITHUB_TOKEN" | docker login ghcr.io -u <github-user> --password-stdin

@@ -84,6 +84,7 @@ host (here `us-east-1`), and the instance role needs read access.
 ```bash
 aws s3 sync /data/tpch-parquet s3://<bucket>/tpch-parquet/sf10/      # 3.65 GiB (3.9 GB), 8 objects, about 7 s
 
+docker stop chpq 2>/dev/null || true      # both servers use the default ports on the host network
 sudo mkdir -p /data/chs3 && sudo chown ubuntu:ubuntu /data/chs3
 docker run -d --name chs3 --network host --ulimit nofile=262144:262144 \
   -v /data/chs3:/var/lib/clickhouse clickhouse/clickhouse-server:26.8.30.8

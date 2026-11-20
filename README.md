@@ -41,7 +41,8 @@ Run these from the repository root.
 The first four folders have the same layout: `README.md` (steps), `schema.sql`, `queries/q6.sql` and
 `queries/q12.sql`; all but ClickHouse (which streams the files through its client) also have
 `load.sql`. `clickhouse-parquet/` and `pgaa/` read Parquet files in place, so they have no
-`load.sql`; they also have `results.csv`, `make_chart.py` and a chart. Q6 is a scan with an aggregate and Q12 a join of `orders` and `lineitem`. The
+`load.sql`; they also have `results.csv`, `make_chart.py` and a chart. Q6 is a scan with an
+aggregate and Q12 a join of `orders` and `lineitem`. The
 queries are the standard text with the validation parameters, adapted only for each engine's
 SQL dialect.
 
