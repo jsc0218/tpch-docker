@@ -1,10 +1,10 @@
 # TPC-H on WarehousePG (Docker)
 
-Steps to run TPC-H against WarehousePG 7 in Docker on the same EC2 host as the PostgreSQL and
-ClickHouse runs (see `../postgres/README.md` and `../clickhouse/README.md`). Status: every step
+Steps to run TPC-H against WarehousePG 7 in Docker on the same EC2 host as the PostgreSQL, ClickHouse
+and MonetDB runs (see `../postgres/README.md` and `../clickhouse/README.md`). Status: every step
 below was run on SF10 with 16 segments and no mirror (Ubuntu, x86_64, 32 vCPUs = 16 cores
 with hyperthreading, 61 GB RAM). The other engines are in `../postgres/`, `../clickhouse/` and
-`../monetdb/`.
+`../monetdb/`; Parquet runs are in `../clickhouse-parquet/` and `../pgaa/`.
 
 Assumes Docker is installed and the SF10 files are already in `/data/tpch` (see
 `../postgres/README.md`, steps 1 to 3). Run the commands from the repository root.
@@ -14,7 +14,7 @@ Assumes Docker is installed and the SF10 files are already in `/data/tpch` (see
 Run one engine at a time so they do not compete for CPU and cache.
 
 ```bash
-docker stop pg18 ch mdb 2>/dev/null || true      # whichever of the other engines are running
+docker stop pg18 ch mdb chpq chs3 pgaa 2>/dev/null || true      # whichever of the other engines are running
 ```
 
 ## 2. Start WarehousePG
@@ -88,7 +88,7 @@ docker exec -i whpg su - gpadmin -c "psql -d postgres -v ON_ERROR_STOP=1 -f -" <
 docker exec whpg su - gpadmin -c "psql -d postgres -c 'SELECT count(*) FROM lineitem'"   # SF10: 59986052
 ```
 
-All eight tables took about 64 s. That single stream is the bottleneck at larger scale factors;
+All eight tables took about 78 s. That single stream is the bottleneck at larger scale factors;
 loading through `gpfdist` external tables would spread it and has not been tried here.
 
 ## 5. Run Q6
@@ -97,10 +97,10 @@ loading through `gpfdist` external tables would spread it and has not been tried
 docker exec -i whpg su - gpadmin -c "psql -d postgres -c '\timing on' -f -" < whpg/queries/q6.sql
 ```
 
-Expect `1230113636.0101`. Median over 5 runs:
+Expect `1230113636.0101`. Median of runs 2 to 6 (run 1 is cold):
 
 ```bash
-for i in 1 2 3 4 5; do
+for i in 1 2 3 4 5 6; do
   docker exec -i whpg su - gpadmin -c "psql -d postgres -c '\timing on' -f -" < whpg/queries/q6.sql | grep Time
 done
 ```

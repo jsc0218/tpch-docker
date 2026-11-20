@@ -12,7 +12,7 @@ Assumes Docker is installed. Run the commands from the repository root.
 Run one engine at a time so they do not compete for CPU and cache.
 
 ```bash
-docker stop pg18 whpg mdb ch 2>/dev/null || true      # whichever of the other engines are running
+docker stop pg18 ch whpg mdb chs3 pgaa 2>/dev/null || true      # whichever of the other engines are running
 ```
 
 ## 2. Generate Parquet
@@ -60,10 +60,10 @@ docker exec -i chpq clickhouse-client --time < clickhouse-parquet/queries/q6.sql
 
 Expect `1230113636.0101`, then the elapsed time in seconds (0.126 = 126 ms).
 
-Median over 5 runs:
+Median of runs 2 to 6 (run 1 is cold):
 
 ```bash
-for i in 1 2 3 4 5; do docker exec -i chpq clickhouse-client --time < clickhouse-parquet/queries/q6.sql; done
+for i in 1 2 3 4 5 6; do docker exec -i chpq clickhouse-client --time < clickhouse-parquet/queries/q6.sql; done
 ```
 
 ## 6. Run Q12
