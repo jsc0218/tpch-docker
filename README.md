@@ -35,20 +35,24 @@ Run these from the repository root.
 - [clickhouse/](clickhouse/README.md): TPC-H on ClickHouse 26.8 (LTS) in Docker
 - [whpg/](whpg/README.md): TPC-H on WarehousePG 7 in Docker (single host, no mirror, column-oriented zstd tables)
 - [monetdb/](monetdb/README.md): TPC-H on MonetDB (Dec2025-SP3) in Docker
+- [clickhouse-parquet/](clickhouse-parquet/README.md): the same data as Parquet files, queried by ClickHouse 26.8 locally and in S3
+- [pgaa/](pgaa/README.md): PostgreSQL 18 with the pgaa extension (EDB Postgres Analytics Accelerator), querying Parquet in S3
 
-Each folder has the same layout: `README.md` (steps), `schema.sql`, `queries/q6.sql` and
+The first four folders have the same layout: `README.md` (steps), `schema.sql`, `queries/q6.sql` and
 `queries/q12.sql`; all but ClickHouse (which streams the files through its client) also have
-`load.sql`. Q6 is a scan with an aggregate and Q12 a join of `orders` and `lineitem`. The
+`load.sql`. `clickhouse-parquet/` and `pgaa/` read Parquet files in place, so they have no
+`load.sql`; they also have `results.csv`, `make_chart.py` and a chart. Q6 is a scan with an aggregate and Q12 a join of `orders` and `lineitem`. The
 queries are the standard text with the validation parameters, adapted only for each engine's
 SQL dialect.
 
 All steps use scale factor 10 (`-s 10`, about 11 GB of `.tbl` files) in `/data/tpch`, with a separate
-data directory per engine.
+data directory per engine. The two Parquet folders use the Parquet files that `tpchgen parquet -s 10`
+writes (3.9 GB; see `clickhouse-parquet/README.md`) instead.
 
 ## Results (SF10, Q6 and Q12, not a benchmark)
 
 One EC2 host (Ubuntu, x86_64, 32 vCPUs = 16 cores with hyperthreading, 61 GB RAM), one engine
-running at a time, median of 5 warm runs in one session. Every engine returns the same answers:
+running at a time, median of 5 warm runs (runs 2 to 6) in one session. Every engine returns the same answers:
 Q6 is `1230113636.0101` and Q12 gives the same rows (MAIL 62071 93045, SHIP 62426 93261).
 
 <img alt="Bar charts of the SF10 results, lower is better. Q6 time: MonetDB 19.7 ms, ClickHouse 94 ms, WarehousePG 484 ms, PostgreSQL 916 ms. Q12 time: 44.7, 145, 694 and 2329 ms. Load time: 39.0, 13.5, 78.0 and 178 s. Database size: 9.11, 4.65, 2.88 and 14.39 GB (raw files 11.23 GB). The tables below hold the same values." src="charts/sf10.svg">
