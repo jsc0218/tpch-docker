@@ -19,7 +19,7 @@ T = dict(surface="#fcfcfb", ink="#0b0b0b", ink2="#52514e", muted="#898781",
          grid="#e1e0d9", base="#c3c2b7",
          series=["#1baf7a", "#eb6834", "#eda100", "#2a78d6", "#7b61c9"])
 TITLE = "ClickHouse 26.8 on TPC-H SF10 Parquet, lower is better"
-SUBTITLE = "One host; median of 5 runs (3 for S3 no cache, 1 MiB seek); cache-on runs follow a filling run"
+SUBTITLE = "One host; median of 5 runs; cache-on runs follow a filling run"
 PANELS = [("Q6 query time (scan)", "Q6"), ("Q12 query time (join)", "Q12")]
 
 FONT = "system-ui, -apple-system, 'Segoe UI', sans-serif"

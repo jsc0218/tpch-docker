@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 494" width="900" height="494" role="img" aria-labelledby="t d" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
 <title id="t">ClickHouse 26.8 on TPC-H SF10 Parquet, lower is better</title>
-<desc id="d">One host; median of 5 runs (3 for S3 no cache, 1 MiB seek); cache-on runs follow a filling run. Q6 query time (scan): Local Parquet (warm) 126 ms, S3 no cache, 4 MiB seek (default) 3109 ms, S3 no cache, 1 MiB seek 1150 ms, S3 cache on, 4 MiB seek (default) 253 ms, S3 cache on, 1 MiB seek 166 ms; Q12 query time (join): Local Parquet (warm) 371 ms, S3 no cache, 4 MiB seek (default) 5363 ms, S3 no cache, 1 MiB seek 2853 ms, S3 cache on, 4 MiB seek (default) 550 ms, S3 cache on, 1 MiB seek 439 ms.</desc>
+<desc id="d">One host; median of 5 runs; cache-on runs follow a filling run. Q6 query time (scan): Local Parquet (warm) 126 ms, S3 no cache, 4 MiB seek (default) 3109 ms, S3 no cache, 1 MiB seek 1150 ms, S3 cache on, 4 MiB seek (default) 253 ms, S3 cache on, 1 MiB seek 166 ms; Q12 query time (join): Local Parquet (warm) 371 ms, S3 no cache, 4 MiB seek (default) 5363 ms, S3 no cache, 1 MiB seek 2853 ms, S3 cache on, 4 MiB seek (default) 550 ms, S3 cache on, 1 MiB seek 439 ms.</desc>
 <rect width="900" height="494" fill="#fcfcfb"/>
 <text x="24" y="34" font-size="17" font-weight="700" fill="#0b0b0b">ClickHouse 26.8 on TPC-H SF10 Parquet, lower is better</text>
-<text x="24" y="55" font-size="12" fill="#52514e">One host; median of 5 runs (3 for S3 no cache, 1 MiB seek); cache-on runs follow a filling run</text>
+<text x="24" y="55" font-size="12" fill="#52514e">One host; median of 5 runs; cache-on runs follow a filling run</text>
 <text x="24" y="90" font-size="13" font-weight="600" fill="#0b0b0b">Q6 query time (scan)</text>
 <text x="265.0" y="258" font-size="11" text-anchor="middle" fill="#898781">0 ms</text>
 <line x1="397.8" y1="102" x2="397.8" y2="242" stroke="#e1e0d9" stroke-width="1"/>

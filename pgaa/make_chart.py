@@ -19,7 +19,7 @@ T = dict(surface="#fcfcfb", ink="#0b0b0b", ink2="#52514e", muted="#898781",
          grid="#e1e0d9", base="#c3c2b7",
          series=["#eb6834", "#eda100", "#2a78d6", "#8a5cc2", "#2f9e6e"])
 TITLE = "pgaa and ClickHouse on TPC-H SF10 Parquet in S3, lower is better"
-SUBTITLE = "Same host and data; one connection, median of runs 2 to 6 (run 1 is the cold one)"
+SUBTITLE = "Same host and data; median of runs 2 to 6 (run 1 is cold); pgaa on one psql connection, ClickHouse one client call per run"
 PANELS = [("Q6 query time (scan)", "Q6"), ("Q12 query time (join)", "Q12")]
 
 FONT = "system-ui, -apple-system, 'Segoe UI', sans-serif"
