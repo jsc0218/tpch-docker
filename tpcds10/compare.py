@@ -14,6 +14,7 @@ def num(x):
     except (TypeError, ValueError): return None
 def level(a, b):          # 0 same, 1 rounding, 2 different
     if a is None or b is None: return 0 if a is None and b is None else 2
+    if isinstance(a, str) and isinstance(b, str) and a.strip() == b.strip(): return 0     # e.g. the first name 'Nan' is not a number
     na, nb = num(a), num(b)
     if na is not None and nb is not None:
         d = abs(na - nb)
