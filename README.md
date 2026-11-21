@@ -35,16 +35,18 @@ Run these from the repository root.
 - [clickhouse/](clickhouse/README.md): TPC-H on ClickHouse 26.8 (LTS) in Docker
 - [whpg/](whpg/README.md): TPC-H on WarehousePG 7 in Docker (single host, no mirror, column-oriented zstd tables)
 - [monetdb/](monetdb/README.md): TPC-H on MonetDB (Dec2025-SP3) in Docker
+- [starrocks/](starrocks/README.md): TPC-H on StarRocks 4.1.8 in Docker (single node, key-sorted tables, Stream Load)
 - [clickhouse-parquet/](clickhouse-parquet/README.md): the same data as Parquet files, queried by ClickHouse 26.8 locally and in S3
 - [pgaa/](pgaa/README.md): PostgreSQL 18 with the pgaa extension (EDB Postgres Analytics Accelerator), querying Parquet in S3
+- [tpch22/](tpch22/README.md): all 22 TPC-H queries on SF10 for ClickHouse and StarRocks, with the timing harness and a check of every answer
 
-The first four folders have the same layout: `README.md` (steps), `schema.sql`, `queries/q6.sql` and
-`queries/q12.sql`; all but ClickHouse (which streams the files through its client) also have
-`load.sql`. `clickhouse-parquet/` and `pgaa/` read Parquet files in place, so they have no
-`load.sql`; they also have `results.csv`, `make_chart.py` and a chart. Q6 is a scan with an
-aggregate and Q12 a join of `orders` and `lineitem`. The
-queries are the standard text with the validation parameters, adapted only for each engine's
-SQL dialect.
+The first five folders have the same layout: `README.md` (steps), `schema.sql`, `queries/q6.sql` and
+`queries/q12.sql`; all but ClickHouse (which streams the files through its client) also have a
+load script, `load.sql`, or `load.sh` for StarRocks (Stream Load over HTTP). `clickhouse-parquet/`
+and `pgaa/` read Parquet files in place, so they have no `load.sql`; they also have `results.csv`,
+`make_chart.py` and a chart. Q6 is a scan with an aggregate and Q12 a join of `orders` and
+`lineitem`. The queries are the standard text with the validation parameters, adapted only for each
+engine's SQL dialect.
 
 All steps use scale factor 10 (`-s 10`, about 11 GB of `.tbl` files) in `/data/tpch`, with a separate
 data directory per engine. The two Parquet folders use the Parquet files that `tpchgen parquet -s 10`
@@ -84,6 +86,10 @@ append-optimized, column-oriented and zstd-compressed (default zstd level), the 
 analytics. ClickHouse and MonetDB run on server defaults. The tables have no keys or secondary
 indexes (ClickHouse's `ORDER BY` sort key is the TPC-H primary key). Loads are not like for like:
 ClickHouse streams through its client, the others use a server-side `COPY`.
+
+The 22-query comparison of ClickHouse and StarRocks, timed with a different (client-side) harness,
+is in [`tpch22/README.md`](tpch22/README.md); its ClickHouse Q6 and Q12 numbers differ from the table
+above because of that.
 
 ## Build locally
 

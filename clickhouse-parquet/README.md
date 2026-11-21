@@ -12,7 +12,7 @@ Assumes Docker is installed. Run the commands from the repository root.
 Run one engine at a time so they do not compete for CPU and cache.
 
 ```bash
-docker stop pg18 ch whpg mdb chs3 pgaa 2>/dev/null || true      # whichever of the other engines are running
+docker stop pg18 ch whpg mdb chs3 pgaa starrocks 2>/dev/null || true      # whichever of the other engines are running
 ```
 
 ## 2. Generate Parquet

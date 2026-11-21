@@ -2,8 +2,8 @@
 
 Steps to run TPC-H against PostgreSQL 18 in Docker on an EC2 host (Ubuntu, x86_64, 32 vCPUs,
 61 GB RAM). Status: the load, Q6 and Q12 were run on SF10 with scripted equivalents of
-the steps below (see "Observed so far"). The other engines are in `../clickhouse/`, `../whpg/`
-and `../monetdb/`; Parquet runs are in `../clickhouse-parquet/` and `../pgaa/`.
+the steps below (see "Observed so far"). The other engines are in `../clickhouse/`, `../whpg/`,
+`../monetdb/` and `../starrocks/`; Parquet runs are in `../clickhouse-parquet/` and `../pgaa/`.
 
 ## 1. Install Docker
 
@@ -45,7 +45,7 @@ ls -lh /data/tpch
 Run one engine at a time so they do not compete for CPU and cache.
 
 ```bash
-docker stop ch whpg mdb chpq chs3 pgaa 2>/dev/null || true      # whichever of the other engines are running
+docker stop ch whpg mdb chpq chs3 pgaa starrocks 2>/dev/null || true      # whichever of the other engines are running
 ```
 
 ```bash

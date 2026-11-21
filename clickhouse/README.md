@@ -2,8 +2,8 @@
 
 Steps to run TPC-H against ClickHouse 26.8 (LTS) in Docker on the same EC2 host as the
 PostgreSQL run (see `../postgres/README.md`). Status: all steps below were run on SF10
-(all eight tables, Q6 and Q12). The other engines are in `../postgres/`, `../whpg/` and
-`../monetdb/`; Parquet runs are in `../clickhouse-parquet/` and `../pgaa/`.
+(all eight tables, Q6 and Q12). The other engines are in `../postgres/`, `../whpg/`,
+`../monetdb/` and `../starrocks/`; Parquet runs are in `../clickhouse-parquet/` and `../pgaa/`.
 
 Assumes Docker is installed and the SF10 files are already in `/data/tpch` (see
 `../postgres/README.md`, steps 1 to 3). Run the commands from the repository root.
@@ -13,7 +13,7 @@ Assumes Docker is installed and the SF10 files are already in `/data/tpch` (see
 Run one engine at a time so they do not compete for CPU and cache.
 
 ```bash
-docker stop pg18 whpg mdb chpq chs3 pgaa 2>/dev/null || true      # whichever of the other engines are running
+docker stop pg18 whpg mdb chpq chs3 pgaa starrocks 2>/dev/null || true      # whichever of the other engines are running
 ```
 
 ## 2. Start ClickHouse
