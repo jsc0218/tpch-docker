@@ -117,6 +117,28 @@ How to read it:
   StarRocks (median 1.05); the warm medians of the two passes by at most 1.03 and 1.12. Gaps below about 1.2 times
   are not a result.
 
+## Comparison with PR #1 (ClickHouse 26.10.7.24 at SF100)
+
+[PR #1](https://github.com/jsc0218/tpch-docker/pull/1) has SF100 results for the same ClickHouse version (26.10.7.24) on the
+same host type (c6id.8xlarge, local NVMe, `numa_balancing=0`, `cpu_dma_latency` held). It times each query twice, back to back,
+as the wall time of `clickhouse-client` started with `docker exec`, and its README describes no restart or cache drop between
+queries. So its runs resemble my warm runs, not my cold ones. The two sets of numbers agree:
+
+| ClickHouse 26.10.7.24, SF100 | PR #1, run 1 | PR #1, run 2 | PR #1, best of 2 | here, cold | here, warm |
+|---|---|---|---|---|---|
+| Sum of the 22 | 50.0 s | 49.1 s | 48.7 s | 53.7 s | 47.0 s |
+| Geometric mean | 1.86 s | 1.83 s | 1.81 s | 2.01 s | 1.71 s |
+
+- PR #1's best of two is 1.04 times my warm median per query at the median (range 0.97 to 1.29); its total is
+  4 % above my warm total. The largest gaps are on the shortest queries (Q2 0.62 against 0.48 s, Q22 0.51 against 0.40 s,
+  Q16 0.49 against 0.42 s), which fits a fixed cost of about 0.1 s for starting `docker exec clickhouse-client` per query (not measured).
+- PR #1's run 1 is 0.95 times my cold run at the median (7 % lower in total) and almost equal to its own run 2
+  (total 50.0 against 49.1 s): its first run is not a cold start.
+- Row counts: all 22 queries in PR #1 return the same number of rows as the DuckDB reference here (for example Q11 92,698 and Q20 17,971).
+  PR #1 notes that its SF100 answers were not compared with an independent engine; here the answers of this ClickHouse version were (all 22 match).
+- Load and size: 128 s and 23.95 GiB in PR #1 (`lineitem` 16.03, `orders` 3.72, `partsupp` 2.65 GiB) against 127 s and 23.71 GiB here (15.98, 3.72, 2.74 GiB).
+  PR #1 loads four files at a time; here all eight at once.
+
 ## Method
 
 - **Data and storage:** `tpchgen -s 100`, in `/mnt/nvme/tpch100`. The local NVMe (XFS) holds the `.tbl` files and
