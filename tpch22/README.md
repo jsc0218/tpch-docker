@@ -3,7 +3,8 @@
 All 22 TPC-H queries on SF10 (about 11 GB of `.tbl` files, 59,986,052 `lineitem` rows) in two column
 stores: ClickHouse 26.8.30.8 (LTS) and StarRocks 4.1.8. Same EC2 host as the rest of this repo
 (Ubuntu, x86_64, 32 vCPUs = 16 cores with hyperthreading, 61 GB RAM), one engine running at a time.
-The steps to set each engine up are in `../clickhouse/` and `../starrocks/`.
+The steps to set each engine up are in `../clickhouse/` and `../starrocks/`. The same queries on SF100, where the
+data is larger than RAM, are in `../tpch100/`.
 
 All the data fits in RAM: the databases are 4.65 GB (ClickHouse) and 3.17 GB (StarRocks), and the
 first runs add up to only about 2 to 5 % more than the later runs.

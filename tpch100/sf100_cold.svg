@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1004.0" width="900" height="1004.0" role="img" aria-labelledby="t d" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+<title id="t">TPC-H SF100, cold start, lower is better</title>
+<desc id="d">One host, one engine at a time; mean of two runs, each the first after an engine restart and an empty page cache. Q1: ClickHouse 26.8 3.39 s, ClickHouse 26.10 3.64 s, StarRocks 4.52 s; Q2: ClickHouse 26.8 0.60 s, ClickHouse 26.10 0.59 s, StarRocks 0.76 s; Q3: ClickHouse 26.8 2.56 s, ClickHouse 26.10 2.47 s, StarRocks 2.69 s; Q4: ClickHouse 26.8 1.55 s, ClickHouse 26.10 1.45 s, StarRocks 1.60 s; Q5: ClickHouse 26.8 2.88 s, ClickHouse 26.10 2.33 s, StarRocks 2.52 s; Q6: ClickHouse 26.8 2.21 s, ClickHouse 26.10 1.86 s, StarRocks 1.26 s; Q7: ClickHouse 26.8 3.22 s, ClickHouse 26.10 2.43 s, StarRocks 2.78 s; Q8: ClickHouse 26.8 3.68 s, ClickHouse 26.10 2.60 s, StarRocks 2.77 s; Q9: ClickHouse 26.8 5.72 s, ClickHouse 26.10 5.50 s, StarRocks 4.03 s; Q10: ClickHouse 26.8 3.03 s, ClickHouse 26.10 2.97 s, StarRocks 3.11 s; Q11: ClickHouse 26.8 0.54 s, ClickHouse 26.10 0.54 s, StarRocks 0.85 s; Q12: ClickHouse 26.8 2.49 s, ClickHouse 26.10 2.38 s, StarRocks 1.92 s; Q13: ClickHouse 26.8 2.18 s, ClickHouse 26.10 2.49 s, StarRocks 2.53 s; Q14: ClickHouse 26.8 2.54 s, ClickHouse 26.10 1.77 s, StarRocks 1.79 s; Q15: ClickHouse 26.8 3.08 s, ClickHouse 26.10 2.87 s, StarRocks 1.68 s; Q16: ClickHouse 26.8 0.50 s, ClickHouse 26.10 0.51 s, StarRocks 0.85 s; Q17: ClickHouse 26.8 2.23 s, ClickHouse 26.10 2.48 s, StarRocks 1.62 s; Q18: ClickHouse 26.8 3.39 s, ClickHouse 26.10 3.18 s, StarRocks 3.47 s; Q19: ClickHouse 26.8 4.34 s, ClickHouse 26.10 3.22 s, StarRocks 1.82 s; Q20: ClickHouse 26.8 2.70 s, ClickHouse 26.10 2.06 s, StarRocks 2.30 s; Q21: ClickHouse 26.8 5.78 s, ClickHouse 26.10 5.83 s, StarRocks 2.87 s; Q22: ClickHouse 26.8 0.59 s, ClickHouse 26.10 0.55 s, StarRocks 0.67 s.</desc>
+<rect width="900" height="1004.0" fill="#fcfcfb"/>
+<text x="24" y="34" font-size="17" font-weight="700" fill="#0b0b0b">TPC-H SF100, cold start, lower is better</text>
+<text x="24" y="55" font-size="12" fill="#52514e">One host, one engine at a time; mean of two runs, each the first after an engine restart and an empty page cache</text>
+<rect x="24" y="70" width="10" height="10" rx="2" fill="#eb6834"/>
+<text x="40" y="79" font-size="12" fill="#52514e">ClickHouse 26.8</text>
+<rect x="174" y="70" width="10" height="10" rx="2" fill="#eda100"/>
+<text x="190" y="79" font-size="12" fill="#52514e">ClickHouse 26.10</text>
+<rect x="324" y="70" width="10" height="10" rx="2" fill="#8a63c9"/>
+<text x="340" y="79" font-size="12" fill="#52514e">StarRocks</text>
+<text x="66.0" y="976.0" font-size="11" text-anchor="middle" fill="#898781">0 s</text>
+<line x1="191.3" y1="100" x2="191.3" y2="958.0" stroke="#e1e0d9" stroke-width="1"/>
+<text x="191.3" y="976.0" font-size="11" text-anchor="middle" fill="#898781">1 s</text>
+<line x1="316.7" y1="100" x2="316.7" y2="958.0" stroke="#e1e0d9" stroke-width="1"/>
+<text x="316.7" y="976.0" font-size="11" text-anchor="middle" fill="#898781">2 s</text>
+<line x1="442.0" y1="100" x2="442.0" y2="958.0" stroke="#e1e0d9" stroke-width="1"/>
+<text x="442.0" y="976.0" font-size="11" text-anchor="middle" fill="#898781">3 s</text>
+<line x1="567.3" y1="100" x2="567.3" y2="958.0" stroke="#e1e0d9" stroke-width="1"/>
+<text x="567.3" y="976.0" font-size="11" text-anchor="middle" fill="#898781">4 s</text>
+<line x1="692.7" y1="100" x2="692.7" y2="958.0" stroke="#e1e0d9" stroke-width="1"/>
+<text x="692.7" y="976.0" font-size="11" text-anchor="middle" fill="#898781">5 s</text>
+<line x1="818.0" y1="100" x2="818.0" y2="958.0" stroke="#e1e0d9" stroke-width="1"/>
+<text x="818.0" y="976.0" font-size="11" text-anchor="middle" fill="#898781">6 s</text>
+<line x1="24" y1="139.0" x2="876" y2="139.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="178.0" x2="876" y2="178.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="217.0" x2="876" y2="217.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="256.0" x2="876" y2="256.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="295.0" x2="876" y2="295.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="334.0" x2="876" y2="334.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="373.0" x2="876" y2="373.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="412.0" x2="876" y2="412.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="451.0" x2="876" y2="451.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="490.0" x2="876" y2="490.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="529.0" x2="876" y2="529.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="568.0" x2="876" y2="568.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="607.0" x2="876" y2="607.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="646.0" x2="876" y2="646.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="685.0" x2="876" y2="685.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="724.0" x2="876" y2="724.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="763.0" x2="876" y2="763.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="802.0" x2="876" y2="802.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="841.0" x2="876" y2="841.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="880.0" x2="876" y2="880.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="24" y1="919.0" x2="876" y2="919.0" stroke="#e1e0d9" stroke-width="0.5" opacity="0.6"/>
+<line x1="66.0" y1="100" x2="66.0" y2="958.0" stroke="#c3c2b7" stroke-width="1"/>
+<text x="60" y="123.5" font-size="12" text-anchor="end" fill="#52514e">Q1</text>
+<path d="M66.0,105.0 h421.7 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-421.7 z" fill="#eb6834"/>
+<text x="495.7" y="112.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">3.39 s</text>
+<path d="M66.0,115.5 h452.7 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-452.7 z" fill="#eda100"/>
+<text x="526.7" y="123.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">3.64 s</text>
+<path d="M66.0,126.0 h563.5 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-563.5 z" fill="#8a63c9"/>
+<text x="637.5" y="133.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">4.52 s</text>
+<text x="60" y="162.5" font-size="12" text-anchor="end" fill="#52514e">Q2</text>
+<path d="M66.0,144.0 h72.0 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-72.0 z" fill="#eb6834"/>
+<text x="146.0" y="151.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">0.60 s</text>
+<path d="M66.0,154.5 h71.2 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-71.2 z" fill="#eda100"/>
+<text x="145.2" y="162.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">0.59 s</text>
+<path d="M66.0,165.0 h92.7 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-92.7 z" fill="#8a63c9"/>
+<text x="166.7" y="172.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">0.76 s</text>
+<text x="60" y="201.5" font-size="12" text-anchor="end" fill="#52514e">Q3</text>
+<path d="M66.0,183.0 h318.0 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-318.0 z" fill="#eb6834"/>
+<text x="392.0" y="190.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.56 s</text>
+<path d="M66.0,193.5 h306.2 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-306.2 z" fill="#eda100"/>
+<text x="380.2" y="201.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.47 s</text>
+<path d="M66.0,204.0 h334.8 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-334.8 z" fill="#8a63c9"/>
+<text x="408.8" y="211.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.69 s</text>
+<text x="60" y="240.5" font-size="12" text-anchor="end" fill="#52514e">Q4</text>
+<path d="M66.0,222.0 h191.9 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-191.9 z" fill="#eb6834"/>
+<text x="265.9" y="229.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">1.55 s</text>
+<path d="M66.0,232.5 h178.7 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-178.7 z" fill="#eda100"/>
+<text x="252.7" y="240.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">1.45 s</text>
+<path d="M66.0,243.0 h197.0 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-197.0 z" fill="#8a63c9"/>
+<text x="271.0" y="250.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">1.60 s</text>
+<text x="60" y="279.5" font-size="12" text-anchor="end" fill="#52514e">Q5</text>
+<path d="M66.0,261.0 h357.5 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-357.5 z" fill="#eb6834"/>
+<text x="431.5" y="268.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.88 s</text>
+<path d="M66.0,271.5 h288.6 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-288.6 z" fill="#eda100"/>
+<text x="362.6" y="279.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.33 s</text>
+<path d="M66.0,282.0 h313.3 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-313.3 z" fill="#8a63c9"/>
+<text x="387.3" y="289.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.52 s</text>
+<text x="60" y="318.5" font-size="12" text-anchor="end" fill="#52514e">Q6</text>
+<path d="M66.0,300.0 h274.5 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-274.5 z" fill="#eb6834"/>
+<text x="348.5" y="307.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.21 s</text>
+<path d="M66.0,310.5 h230.3 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-230.3 z" fill="#eda100"/>
+<text x="304.3" y="318.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">1.86 s</text>
+<path d="M66.0,321.0 h155.0 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-155.0 z" fill="#8a63c9"/>
+<text x="229.0" y="328.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">1.26 s</text>
+<text x="60" y="357.5" font-size="12" text-anchor="end" fill="#52514e">Q7</text>
+<path d="M66.0,339.0 h400.7 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-400.7 z" fill="#eb6834"/>
+<text x="474.7" y="346.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">3.22 s</text>
+<path d="M66.0,349.5 h301.5 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-301.5 z" fill="#eda100"/>
+<text x="375.5" y="357.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.43 s</text>
+<path d="M66.0,360.0 h345.1 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-345.1 z" fill="#8a63c9"/>
+<text x="419.1" y="367.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.78 s</text>
+<text x="60" y="396.5" font-size="12" text-anchor="end" fill="#52514e">Q8</text>
+<path d="M66.0,378.0 h458.2 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-458.2 z" fill="#eb6834"/>
+<text x="532.2" y="385.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">3.68 s</text>
+<path d="M66.0,388.5 h322.9 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-322.9 z" fill="#eda100"/>
+<text x="396.9" y="396.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.60 s</text>
+<path d="M66.0,399.0 h344.6 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-344.6 z" fill="#8a63c9"/>
+<text x="418.6" y="406.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.77 s</text>
+<text x="60" y="435.5" font-size="12" text-anchor="end" fill="#52514e">Q9</text>
+<path d="M66.0,417.0 h714.1 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-714.1 z" fill="#eb6834"/>
+<text x="788.1" y="424.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">5.72 s</text>
+<path d="M66.0,427.5 h686.9 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-686.9 z" fill="#eda100"/>
+<text x="760.9" y="435.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">5.50 s</text>
+<path d="M66.0,438.0 h502.0 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-502.0 z" fill="#8a63c9"/>
+<text x="576.0" y="445.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">4.03 s</text>
+<text x="60" y="474.5" font-size="12" text-anchor="end" fill="#52514e">Q10</text>
+<path d="M66.0,456.0 h377.2 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-377.2 z" fill="#eb6834"/>
+<text x="451.2" y="463.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">3.03 s</text>
+<path d="M66.0,466.5 h368.9 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-368.9 z" fill="#eda100"/>
+<text x="442.9" y="474.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.97 s</text>
+<path d="M66.0,477.0 h387.4 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-387.4 z" fill="#8a63c9"/>
+<text x="461.4" y="484.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">3.11 s</text>
+<text x="60" y="513.5" font-size="12" text-anchor="end" fill="#52514e">Q11</text>
+<path d="M66.0,495.0 h64.2 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-64.2 z" fill="#eb6834"/>
+<text x="138.2" y="502.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">0.54 s</text>
+<path d="M66.0,505.5 h64.9 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-64.9 z" fill="#eda100"/>
+<text x="138.9" y="513.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">0.54 s</text>
+<path d="M66.0,516.0 h104.0 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-104.0 z" fill="#8a63c9"/>
+<text x="178.0" y="523.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">0.85 s</text>
+<text x="60" y="552.5" font-size="12" text-anchor="end" fill="#52514e">Q12</text>
+<path d="M66.0,534.0 h309.1 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-309.1 z" fill="#eb6834"/>
+<text x="383.1" y="541.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.49 s</text>
+<path d="M66.0,544.5 h295.6 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-295.6 z" fill="#eda100"/>
+<text x="369.6" y="552.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.38 s</text>
+<path d="M66.0,555.0 h237.1 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-237.1 z" fill="#8a63c9"/>
+<text x="311.1" y="562.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">1.92 s</text>
+<text x="60" y="591.5" font-size="12" text-anchor="end" fill="#52514e">Q13</text>
+<path d="M66.0,573.0 h270.0 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-270.0 z" fill="#eb6834"/>
+<text x="344.0" y="580.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.18 s</text>
+<path d="M66.0,583.5 h308.7 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-308.7 z" fill="#eda100"/>
+<text x="382.7" y="591.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.49 s</text>
+<path d="M66.0,594.0 h314.7 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-314.7 z" fill="#8a63c9"/>
+<text x="388.7" y="601.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.53 s</text>
+<text x="60" y="630.5" font-size="12" text-anchor="end" fill="#52514e">Q14</text>
+<path d="M66.0,612.0 h315.3 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-315.3 z" fill="#eb6834"/>
+<text x="389.3" y="619.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.54 s</text>
+<path d="M66.0,622.5 h218.7 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-218.7 z" fill="#eda100"/>
+<text x="292.7" y="630.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">1.77 s</text>
+<path d="M66.0,633.0 h221.6 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-221.6 z" fill="#8a63c9"/>
+<text x="295.6" y="640.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">1.79 s</text>
+<text x="60" y="669.5" font-size="12" text-anchor="end" fill="#52514e">Q15</text>
+<path d="M66.0,651.0 h382.8 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-382.8 z" fill="#eb6834"/>
+<text x="456.8" y="658.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">3.08 s</text>
+<path d="M66.0,661.5 h356.9 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-356.9 z" fill="#eda100"/>
+<text x="430.9" y="669.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.87 s</text>
+<path d="M66.0,672.0 h208.0 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-208.0 z" fill="#8a63c9"/>
+<text x="282.0" y="679.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">1.68 s</text>
+<text x="60" y="708.5" font-size="12" text-anchor="end" fill="#52514e">Q16</text>
+<path d="M66.0,690.0 h59.9 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-59.9 z" fill="#eb6834"/>
+<text x="133.9" y="697.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">0.50 s</text>
+<path d="M66.0,700.5 h60.4 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-60.4 z" fill="#eda100"/>
+<text x="134.4" y="708.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">0.51 s</text>
+<path d="M66.0,711.0 h103.9 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-103.9 z" fill="#8a63c9"/>
+<text x="177.9" y="718.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">0.85 s</text>
+<text x="60" y="747.5" font-size="12" text-anchor="end" fill="#52514e">Q17</text>
+<path d="M66.0,729.0 h275.9 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-275.9 z" fill="#eb6834"/>
+<text x="349.9" y="736.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.23 s</text>
+<path d="M66.0,739.5 h308.3 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-308.3 z" fill="#eda100"/>
+<text x="382.3" y="747.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.48 s</text>
+<path d="M66.0,750.0 h199.7 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-199.7 z" fill="#8a63c9"/>
+<text x="273.7" y="757.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">1.62 s</text>
+<text x="60" y="786.5" font-size="12" text-anchor="end" fill="#52514e">Q18</text>
+<path d="M66.0,768.0 h422.2 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-422.2 z" fill="#eb6834"/>
+<text x="496.2" y="775.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">3.39 s</text>
+<path d="M66.0,778.5 h395.6 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-395.6 z" fill="#eda100"/>
+<text x="469.6" y="786.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">3.18 s</text>
+<path d="M66.0,789.0 h432.0 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-432.0 z" fill="#8a63c9"/>
+<text x="506.0" y="796.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">3.47 s</text>
+<text x="60" y="825.5" font-size="12" text-anchor="end" fill="#52514e">Q19</text>
+<path d="M66.0,807.0 h540.3 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-540.3 z" fill="#eb6834"/>
+<text x="614.3" y="814.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">4.34 s</text>
+<path d="M66.0,817.5 h400.6 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-400.6 z" fill="#eda100"/>
+<text x="474.6" y="825.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">3.22 s</text>
+<path d="M66.0,828.0 h225.4 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-225.4 z" fill="#8a63c9"/>
+<text x="299.4" y="835.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">1.82 s</text>
+<text x="60" y="864.5" font-size="12" text-anchor="end" fill="#52514e">Q20</text>
+<path d="M66.0,846.0 h335.1 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-335.1 z" fill="#eb6834"/>
+<text x="409.1" y="853.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.70 s</text>
+<path d="M66.0,856.5 h254.9 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-254.9 z" fill="#eda100"/>
+<text x="328.9" y="864.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.06 s</text>
+<path d="M66.0,867.0 h285.0 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-285.0 z" fill="#8a63c9"/>
+<text x="359.0" y="874.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.30 s</text>
+<text x="60" y="903.5" font-size="12" text-anchor="end" fill="#52514e">Q21</text>
+<path d="M66.0,885.0 h721.2 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-721.2 z" fill="#eb6834"/>
+<text x="795.2" y="892.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">5.78 s</text>
+<path d="M66.0,895.5 h727.9 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-727.9 z" fill="#eda100"/>
+<text x="801.9" y="903.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">5.83 s</text>
+<path d="M66.0,906.0 h357.2 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-357.2 z" fill="#8a63c9"/>
+<text x="431.2" y="913.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">2.87 s</text>
+<text x="60" y="942.5" font-size="12" text-anchor="end" fill="#52514e">Q22</text>
+<path d="M66.0,924.0 h70.9 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-70.9 z" fill="#eb6834"/>
+<text x="144.9" y="931.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">0.59 s</text>
+<path d="M66.0,934.5 h66.5 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-66.5 z" fill="#eda100"/>
+<text x="140.5" y="942.0" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">0.55 s</text>
+<path d="M66.0,945.0 h81.4 a3.0,3.0 0 0 1 3.0,3.0 v2.0 a3.0,3.0 0 0 1 -3.0,3.0 h-81.4 z" fill="#8a63c9"/>
+<text x="155.4" y="952.5" font-size="9" font-weight="600" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="3" stroke-linejoin="round" paint-order="stroke">0.67 s</text>
+</svg>

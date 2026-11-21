@@ -39,6 +39,7 @@ Run these from the repository root.
 - [clickhouse-parquet/](clickhouse-parquet/README.md): the same data as Parquet files, queried by ClickHouse 26.8 locally and in S3
 - [pgaa/](pgaa/README.md): PostgreSQL 18 with the pgaa extension (EDB Postgres Analytics Accelerator), querying Parquet in S3
 - [tpch22/](tpch22/README.md): all 22 TPC-H queries on SF10 for ClickHouse and StarRocks, with the timing harness and a check of every answer
+- [tpch100/](tpch100/README.md): the same 22 queries on SF100 (data larger than RAM; cold start and warm) for ClickHouse and StarRocks
 
 The first five folders have the same layout: `README.md` (steps), `schema.sql`, `queries/q6.sql` and
 `queries/q12.sql`; all but ClickHouse (which streams the files through its client) also have a
