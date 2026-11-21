@@ -12,7 +12,7 @@ Assumes Docker is installed. Run the commands from the repository root.
 Run one engine at a time so they do not compete for CPU and cache.
 
 ```bash
-docker stop pg18 whpg mdb ch 2>/dev/null || true      # whichever of the other engines are running
+docker stop pg18 ch whpg mdb chs3 pgaa 2>/dev/null || true      # whichever of the other engines are running
 ```
 
 ## 2. Generate Parquet
@@ -20,7 +20,7 @@ docker stop pg18 whpg mdb ch 2>/dev/null || true      # whichever of the other e
 ```bash
 sudo mkdir -p /data/tpch-parquet && sudo chown ubuntu:ubuntu /data/tpch-parquet
 docker run --rm -v /data/tpch-parquet:/out ghcr.io/jsc0218/tpchgen:latest parquet -s 10 --output-dir /out
-ls -lh /data/tpch-parquet      # one <table>.parquet per table, 3.7 GB in total
+ls -lh /data/tpch-parquet      # one <table>.parquet per table; 3.9 GB in total (`ls -lh` shows 3.7G, in GiB)
 ```
 
 ## 3. Start ClickHouse with the files mounted
@@ -58,12 +58,12 @@ docker exec -it chpq clickhouse-client -q "SELECT count() FROM lineitem"   # SF1
 docker exec -i chpq clickhouse-client --time < clickhouse-parquet/queries/q6.sql
 ```
 
-Expect `1230113636.0101`, then the elapsed time in seconds (0.109 = 109 ms).
+Expect `1230113636.0101`, then the elapsed time in seconds (0.126 = 126 ms).
 
-Median over 5 runs:
+Median of runs 2 to 6 (run 1 is cold):
 
 ```bash
-for i in 1 2 3 4 5; do docker exec -i chpq clickhouse-client --time < clickhouse-parquet/queries/q6.sql; done
+for i in 1 2 3 4 5 6; do docker exec -i chpq clickhouse-client --time < clickhouse-parquet/queries/q6.sql; done
 ```
 
 ## 6. Run Q12
@@ -82,8 +82,9 @@ The same Parquet files can be queried from S3. The bucket must be in the same re
 host (here `us-east-1`), and the instance role needs read access.
 
 ```bash
-aws s3 sync /data/tpch-parquet s3://<bucket>/tpch-parquet/sf10/      # 3.6 GiB, 8 objects, about 7 s
+aws s3 sync /data/tpch-parquet s3://<bucket>/tpch-parquet/sf10/      # 3.65 GiB (3.9 GB), 8 objects, about 7 s
 
+docker stop chpq 2>/dev/null || true      # both servers use the default ports on the host network
 sudo mkdir -p /data/chs3 && sudo chown ubuntu:ubuntu /data/chs3
 docker run -d --name chs3 --network host --ulimit nofile=262144:262144 \
   -v /data/chs3:/var/lib/clickhouse clickhouse/clickhouse-server:26.8.30.8
@@ -130,16 +131,22 @@ client command (or put it in the default profile):
 docker exec -i chs3 clickhouse-client --remote_read_min_bytes_for_seek=1048576 --time < clickhouse-parquet/queries/q6.sql
 ```
 
-Q6, no cache, median of 3 (S3 data read, requests): 4 MiB 4.36 s (1.93 GiB, 134); 1 MiB 0.86 s
-(613 MiB, 527); 256 KiB 1.85 s (613 MiB, 918); 8 KiB 19.6 s (561 MiB, 8964); 0 34.0 s (559 MiB,
-17818). The cache segment size (`max_file_segment_size`, `boundary_alignment`) made no
-difference: 4 MiB and 1 MiB segments gave the same bytes read and timings as the default 32 MiB.
-With the cache on, the filling run still reads up to 1.6 GiB from S3; only later runs read the
-lower amount. Check every answer after changing the setting (they matched here).
+Q6, no cache, median of 3 (S3 data read, requests): 4 MiB 4.80 s (1.93 GiB, 131); 1 MiB 1.36 s
+(613 MiB, 526); 256 KiB 2.11 s (613 MiB, 917); 8 KiB 17.1 s (561 MiB, 8963); 0 31.1 s (559 MiB,
+17817). The cache segment size (`max_file_segment_size`) only changes the filling run. With the
+1 MiB seek setting, 4 MiB segments read the same from S3 as the default 32 MiB (Q6 1646 MiB, Q12
+494 MiB), while 1 MiB segments read 874 MiB for Q6 and 708 MiB for Q12, with about twice as many
+requests for Q6 (1134 against 528). `boundary_alignment` (4 MiB by default) must not exceed the
+segment size, so 1 MiB segments also need `boundary_alignment` set to 1 MiB, or the server does
+not start. With the default seek setting, 1 MiB segments made the Q6 filling run slower (10.4 s
+against 5.4 s) and the second run still read 299 MiB (1.4 s against 0.27 s). Later runs with the
+1 MiB seek setting were the same for all three sizes. With the cache on, the filling run reads up
+to 1.6 GiB from S3 (2.2 GiB with the default seek setting); only later runs read the lower
+amount. Check every answer after changing the setting (they matched here).
 
 ## Observed so far (not a benchmark)
 
-<img alt="Bar charts of ClickHouse on SF10 Parquet, lower is better. Q6 time: local Parquet warm 109 ms, S3 no cache with the default 4 MiB seek 2970 ms, S3 no cache with 1 MiB seek 861 ms, S3 cache on with the default 4 MiB seek 262 ms, S3 cache on with 1 MiB seek 153 ms. Q12 time: 338, 5990, 2896, 501 and 403 ms. The table below holds the same values." src="sf10.svg">
+<img alt="Bar charts of ClickHouse on SF10 Parquet, lower is better. Q6 time: local Parquet warm 126 ms, S3 no cache with the default 4 MiB seek 3109 ms, S3 no cache with 1 MiB seek 1150 ms, S3 cache on with the default 4 MiB seek 253 ms, S3 cache on with 1 MiB seek 166 ms. Q12 time: 371, 5363, 2853, 550 and 439 ms. The table below holds the same values." src="sf10.svg">
 
 Drawn from [`results.csv`](results.csv) by `python3 clickhouse-parquet/make_chart.py` (standard library
 only). The chart has one linear axis per panel, so bar lengths compare within a panel but not
@@ -147,23 +154,25 @@ between panels.
 
 | | Q6 | Q12 |
 |---|---|---|
-| Local Parquet (warm page cache), median of 5 | 109 ms | 338 ms |
-| S3, no cache, default seek setting, median of 5 | 2.97 s | 5.99 s |
-| S3, no cache, `remote_read_min_bytes_for_seek` 1 MiB, median of 3 | 0.86 s | 2.90 s |
-| S3, filesystem cache on, default seek setting, median of 5 (after a filling run) | 262 ms | 501 ms |
-| S3, filesystem cache on, 1 MiB seek setting, median of 5 (after a filling run) | 153 ms | 403 ms |
+| Local Parquet (warm page cache), median of 5 | 126 ms | 371 ms |
+| S3, no cache, default seek setting, median of 5 | 3.11 s | 5.36 s |
+| S3, no cache, `remote_read_min_bytes_for_seek` 1 MiB, median of 5 | 1.15 s | 2.85 s |
+| S3, filesystem cache on, default seek setting, median of 5 (after a filling run) | 253 ms | 550 ms |
+| S3, filesystem cache on, 1 MiB seek setting, median of 5 (after a filling run) | 166 ms | 439 ms |
 
-Parquet files on disk: 3.7 GB (3.6 GiB in S3).
+Parquet files on disk: 3.9 GB (3.65 GiB); the same 8 files in S3.
 
-Runs (s): local Q6 0.109 0.106 0.134 0.107 0.110, Q12 0.341 0.333 0.359 0.338 0.334; S3 Q6
-3.37 2.98 2.87 2.97 2.94 (first run 5.28), Q12 6.30 6.27 5.99 5.39 5.37 (first run 8.74); S3 with
-cache Q6 0.267 0.262 0.266 0.222 0.241 (filling run 8.00), Q12 0.526 0.488 0.516 0.486 0.501
-(filling run 8.36); S3 with cache and the 1 MiB seek setting Q6 0.157 0.147 0.151 0.153 0.156
-(filling run 2.12), Q12 0.413 0.403 0.424 0.393 0.396 (filling run 1.01). Server defaults except
+Runs 2 to 6 (s), first or filling run in brackets: local Q6 0.126 0.125 0.153 0.131 0.125
+(0.137), Q12 0.371 0.371 0.392 0.367 0.371 (0.372); S3 no cache, default seek, Q6 3.53 2.89 3.11
+2.88 3.18 (5.03), Q12 5.44 5.84 5.36 5.17 5.30 (6.83); S3 no cache, 1 MiB seek, Q6 1.35 1.12
+1.55 1.15 1.01 (1.09), Q12 2.85 2.65 3.02 2.82 3.06 (2.82); S3 with cache, default seek, Q6
+0.267 0.253 0.268 0.237 0.238 (filling run 7.86), Q12 0.616 0.550 0.532 0.614 0.516 (filling
+run 9.46); S3 with cache and the 1 MiB seek setting Q6 0.162 0.166 0.177 0.164 0.166 (filling
+run 2.84), Q12 0.439 0.439 0.438 0.431 0.545 (filling run 4.54). Server defaults except
 where a row says otherwise, one session, same-region S3. The local runs are warm, so they
 show decode and compute speed with almost no I/O and are not an object-storage figure. The native
-MergeTree figures in the root README (Q6 72 ms, Q12 113 ms) come from an earlier session, not
-from the same run, so the comparison is indicative only.
+MergeTree figures in the root README (Q6 94 ms, Q12 145 ms) come from a separate run on the same host,
+so the comparison is indicative only.
 
 ## Removing things
 

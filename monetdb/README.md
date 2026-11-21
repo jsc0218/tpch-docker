@@ -3,7 +3,8 @@
 Steps to run TPC-H against MonetDB (release Dec2025-SP3, 11.55.7) in Docker on the same EC2 host
 as the PostgreSQL, ClickHouse and WarehousePG runs (see `../postgres/README.md`). Status: the
 load, Q6 and Q12 were run on SF10 with scripted equivalents of the steps below. The other
-engines are in `../postgres/`, `../clickhouse/` and `../whpg/`.
+engines are in `../postgres/`, `../clickhouse/` and `../whpg/`; Parquet runs are in
+`../clickhouse-parquet/` and `../pgaa/`.
 
 Assumes Docker is installed and the SF10 files are already in `/data/tpch` (see
 `../postgres/README.md`, steps 1 to 3). Run the commands from the repository root.
@@ -13,7 +14,7 @@ Assumes Docker is installed and the SF10 files are already in `/data/tpch` (see
 Run one engine at a time so they do not compete for CPU and cache.
 
 ```bash
-docker stop pg18 ch whpg 2>/dev/null || true      # whichever of the other engines are running
+docker stop pg18 ch whpg chpq chs3 pgaa 2>/dev/null || true      # whichever of the other engines are running
 ```
 
 ## 2. Start MonetDB
@@ -70,10 +71,10 @@ mc -t performance < monetdb/queries/q6.sql
 ```
 
 The `clk:` line is the elapsed time in ms; the client prints it on stderr. Expect
-`1230113636.0101`. Median over 5 runs:
+`1230113636.0101`. Median of runs 2 to 6 (run 1 is cold):
 
 ```bash
-for i in 1 2 3 4 5; do mc -t performance < monetdb/queries/q6.sql 2>&1 | grep '^clk'; done
+for i in 1 2 3 4 5 6; do mc -t performance < monetdb/queries/q6.sql 2>&1 | grep '^clk'; done
 ```
 
 ## 6. Run Q12
@@ -88,14 +89,14 @@ Q12 is a join of `orders` and `lineitem`. At SF10 the result is MAIL 62071 93045
 
 | | SF10 |
 |---|---|
-| Load (all tables, `load.sql`) | 37.4 s |
-| Q6, median of 5 | 17.7 ms |
-| Q12, median of 5 | 44.8 ms |
+| Load (all tables, `load.sql`) | 39.0 s |
+| Q6, median of 5 | 19.7 ms |
+| Q12, median of 5 | 44.7 ms |
 | Database size | 9.11 GB |
 
 Server defaults (32 worker threads, about 54 GB of memory chosen by the server), one session,
 warm cache. The comparison with the other engines is in the
-[root README](../README.md#results-sf1-and-sf10-q6-and-q12-not-a-benchmark).
+[root README](../README.md#results-sf10-q6-and-q12-not-a-benchmark).
 
 ## Removing things
 

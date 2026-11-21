@@ -2,7 +2,8 @@
 
 Steps to run TPC-H against ClickHouse 26.8 (LTS) in Docker on the same EC2 host as the
 PostgreSQL run (see `../postgres/README.md`). Status: all steps below were run on SF10
-(all eight tables, Q6 and Q12). The other engines are in `../whpg/` and `../monetdb/`.
+(all eight tables, Q6 and Q12). The other engines are in `../postgres/`, `../whpg/` and
+`../monetdb/`; Parquet runs are in `../clickhouse-parquet/` and `../pgaa/`.
 
 Assumes Docker is installed and the SF10 files are already in `/data/tpch` (see
 `../postgres/README.md`, steps 1 to 3). Run the commands from the repository root.
@@ -12,7 +13,7 @@ Assumes Docker is installed and the SF10 files are already in `/data/tpch` (see
 Run one engine at a time so they do not compete for CPU and cache.
 
 ```bash
-docker stop pg18 whpg mdb 2>/dev/null || true      # whichever of the other engines are running
+docker stop pg18 whpg mdb chpq chs3 pgaa 2>/dev/null || true      # whichever of the other engines are running
 ```
 
 ## 2. Start ClickHouse
@@ -60,12 +61,12 @@ docker exec -i ch clickhouse-client --time < clickhouse/queries/q6.sql
 ```
 
 Expect `1230113636.0101`, then the elapsed time in seconds
-(0.017 = 17 ms).
+(0.094 = 94 ms).
 
-Median over 5 runs:
+Median of runs 2 to 6 (run 1 is cold):
 
 ```bash
-for i in 1 2 3 4 5; do docker exec -i ch clickhouse-client --time < clickhouse/queries/q6.sql; done
+for i in 1 2 3 4 5 6; do docker exec -i ch clickhouse-client --time < clickhouse/queries/q6.sql; done
 ```
 
 ## 6. Run Q12
@@ -90,13 +91,13 @@ trusting its timing.
 
 | | SF10 |
 |---|---|
-| Load (all tables, client streaming) | 13.6 s |
-| Q6, median of 5 | 72 ms |
-| Q12, median of 5 | 113 ms |
+| Load (all tables, client streaming) | 13.5 s |
+| Q6, median of 5 | 94 ms |
+| Q12, median of 5 | 145 ms |
 | Table size on disk (compressed, active parts) | 4.65 GB |
 
 Server defaults, default compression, one session, warm cache. The comparison with the other
-engines is in the [root README](../README.md#results-sf1-and-sf10-q6-and-q12-not-a-benchmark).
+engines is in the [root README](../README.md#results-sf10-q6-and-q12-not-a-benchmark).
 
 ## Removing things
 
@@ -113,6 +114,6 @@ sudo rm -rf /data/ch      # deletes the database files
   `l_shipdate`.
 - Table size is the sum of `bytes_on_disk` over active parts in `system.parts`. Right after a
   load, background merges leave inactive parts on disk until the server has run for a few
-  minutes (1.88 GB extra on SF10 when measured too early), so `du` on the data directory
+  minutes (about 2 GB extra on SF10 when measured too early), so `du` on the data directory
   overstates it.
 - Results are TPC-H-derived, not comparable to official TPC Benchmark Results.
