@@ -3,8 +3,8 @@
 Steps to run TPC-H against WarehousePG 7 in Docker on the same EC2 host as the PostgreSQL, ClickHouse
 and MonetDB runs (see `../postgres/README.md` and `../clickhouse/README.md`). Status: every step
 below was run on SF10 with 16 segments and no mirror (Ubuntu, x86_64, 32 vCPUs = 16 cores
-with hyperthreading, 61 GB RAM). The other engines are in `../postgres/`, `../clickhouse/` and
-`../monetdb/`; Parquet runs are in `../clickhouse-parquet/` and `../pgaa/`.
+with hyperthreading, 61 GB RAM). The other engines are in `../postgres/`, `../clickhouse/`,
+`../monetdb/` and `../starrocks/`; Parquet runs are in `../clickhouse-parquet/` and `../pgaa/`.
 
 Assumes Docker is installed and the SF10 files are already in `/data/tpch` (see
 `../postgres/README.md`, steps 1 to 3). Run the commands from the repository root.
@@ -14,7 +14,7 @@ Assumes Docker is installed and the SF10 files are already in `/data/tpch` (see
 Run one engine at a time so they do not compete for CPU and cache.
 
 ```bash
-docker stop pg18 ch mdb chpq chs3 pgaa 2>/dev/null || true      # whichever of the other engines are running
+docker stop pg18 ch mdb chpq chs3 pgaa starrocks 2>/dev/null || true      # whichever of the other engines are running
 ```
 
 ## 2. Start WarehousePG
