@@ -1,7 +1,8 @@
 #!/bin/bash
 # Stream Load each .tbl file through the FE HTTP port. The files end every row with '|', so the
 # column list has a trailing dummy column that is not stored.
-set -e
+set -eo pipefail
+DIR=${TBL_DIR:-/data/tpch}          # where the .tbl files are (TBL_DIR), PARALLEL=1 loads all tables at once
 cols() { case $1 in
   region)   echo "r_regionkey,r_name,r_comment,dummy" ;;
   nation)   echo "n_nationkey,n_name,n_regionkey,n_comment,dummy" ;;
@@ -12,9 +13,14 @@ cols() { case $1 in
   orders)   echo "o_orderkey,o_custkey,o_orderstatus,o_totalprice,o_orderdate,o_orderpriority,o_clerk,o_shippriority,o_comment,dummy" ;;
   lineitem) echo "l_orderkey,l_partkey,l_suppkey,l_linenumber,l_quantity,l_extendedprice,l_discount,l_tax,l_returnflag,l_linestatus,l_shipdate,l_commitdate,l_receiptdate,l_shipinstruct,l_shipmode,l_comment,dummy" ;;
 esac; }
-for t in region nation supplier customer part partsupp orders lineitem; do
-  curl -sS --location-trusted -u root: -H "label: load_${t}_$(date +%s)" -H "column_separator:|" \
-       -H "columns: $(cols $t)" -H "max_filter_ratio: 0" -H "timeout: 3600" -H "Expect: 100-continue" \
-       -T /data/tpch/$t.tbl http://127.0.0.1:8030/api/tpch/$t/_stream_load \
-  | python3 -c "import sys,json; r=json.load(sys.stdin); print('$t', r['Status'], r.get('NumberLoadedRows'), r.get('Message','')[:80]); sys.exit(0 if r['Status']=='Success' else 1)"
-done
+load() {
+  curl -sS --location-trusted -u root: -H "label: load_${1}_$(date +%s)" -H "column_separator:|" \
+       -H "columns: $(cols $1)" -H "max_filter_ratio: 0" -H "timeout: 3600" -H "Expect: 100-continue" \
+       -T $DIR/$1.tbl http://127.0.0.1:8030/api/tpch/$1/_stream_load \
+  | python3 -c "import sys,json; r=json.load(sys.stdin); print('$1', r['Status'], r.get('NumberLoadedRows'), r.get('Message','')[:80]); sys.exit(0 if r['Status']=='Success' else 1)"
+}
+if [ -n "$PARALLEL" ]; then                  # PARALLEL=1: all eight tables at the same time
+  pids=(); for t in region nation supplier customer part partsupp orders lineitem; do load $t & pids+=($!); done
+  fail=0; for p in "${pids[@]}"; do wait $p || fail=1; done; exit $fail
+fi
+for t in region nation supplier customer part partsupp orders lineitem; do load $t; done

@@ -6,11 +6,15 @@ Run it where the files are, e.g.:
   docker run --rm -v /data/tpch:/data/tpch:ro -v $PWD/tpch22:/w -w /w python:3.12-slim sh -c \
     "pip install -q duckdb && python3 reference.py /data/tpch queries /w/reference.json"
 """
-import datetime, decimal, json, sys, time
+import datetime, decimal, json, os, sys, time
 import duckdb
 
 tbl, qdir, out = sys.argv[1:4]
-c = duckdb.connect()
+# SF10 fits in memory. For SF100 set DUCKDB_DB (a database file), DUCKDB_MEMORY (e.g. 40GB) and
+# DUCKDB_TEMP (a directory) so that DuckDB works out of core.
+c = duckdb.connect(os.environ.get("DUCKDB_DB", ":memory:"))
+if os.environ.get("DUCKDB_MEMORY"): c.execute(f"SET memory_limit='{os.environ['DUCKDB_MEMORY']}'")
+if os.environ.get("DUCKDB_TEMP"): c.execute(f"SET temp_directory='{os.environ['DUCKDB_TEMP']}'")
 c.execute("INSTALL tpch; LOAD tpch;")
 c.execute("CALL dbgen(sf=0)")                       # empty tables with the standard TPC-H schema
 for t in ['region', 'nation', 'supplier', 'customer', 'part', 'partsupp', 'orders', 'lineitem']:

@@ -4,7 +4,7 @@ Steps to run TPC-H against StarRocks 4.1.8 in Docker on the same EC2 host as the
 (see `../postgres/README.md`). Status: all steps below were run on SF10 (all eight tables, all 22
 queries). The other engines are in `../postgres/`, `../clickhouse/`, `../whpg/` and `../monetdb/`;
 Parquet runs are in `../clickhouse-parquet/` and `../pgaa/`. The 22-query comparison of StarRocks
-and ClickHouse is in `../tpch22/README.md`.
+and ClickHouse is in `../tpch22/README.md` (SF10, in RAM) and `../tpch100/README.md` (SF100).
 
 Assumes Docker is installed and the SF10 files are already in `/data/tpch` (see
 `../postgres/README.md`, steps 1 to 3). Run the commands from the repository root.
@@ -55,7 +55,7 @@ Stream Load sends each file through the FE HTTP port. The `.tbl` rows end with `
 adds a dummy column to the column list. It needs `curl` and `python3` on the host.
 
 ```bash
-bash starrocks/load.sh
+bash starrocks/load.sh      # TBL_DIR=<dir> for another directory, PARALLEL=1 to load all eight tables at once
 docker exec starrocks mysql -h127.0.0.1 -P9030 -uroot -N -e "select count(*) from tpch.lineitem"   # SF10: 59986052
 ```
 

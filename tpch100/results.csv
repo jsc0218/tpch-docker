@@ -1,0 +1,133 @@
+mode,panel,engine,value,label
+cold,Q1,ClickHouse 26.8,3388.65,3.39 s
+warm,Q1,ClickHouse 26.8,2683.9,2.68 s
+cold,Q2,ClickHouse 26.8,598.32,0.60 s
+warm,Q2,ClickHouse 26.8,444.21,0.44 s
+cold,Q3,ClickHouse 26.8,2561.49,2.56 s
+warm,Q3,ClickHouse 26.8,1431.82,1.43 s
+cold,Q4,ClickHouse 26.8,1554.99,1.55 s
+warm,Q4,ClickHouse 26.8,1024.95,1.02 s
+cold,Q5,ClickHouse 26.8,2876.22,2.88 s
+warm,Q5,ClickHouse 26.8,1405.88,1.41 s
+cold,Q6,ClickHouse 26.8,2213.92,2.21 s
+warm,Q6,ClickHouse 26.8,664.89,0.66 s
+cold,Q7,ClickHouse 26.8,3221.33,3.22 s
+warm,Q7,ClickHouse 26.8,1338.79,1.34 s
+cold,Q8,ClickHouse 26.8,3679.49,3.68 s
+warm,Q8,ClickHouse 26.8,1491.21,1.49 s
+cold,Q9,ClickHouse 26.8,5721.19,5.72 s
+warm,Q9,ClickHouse 26.8,2869.61,2.87 s
+cold,Q10,ClickHouse 26.8,3033.89,3.03 s
+warm,Q10,ClickHouse 26.8,2179.78,2.18 s
+cold,Q11,ClickHouse 26.8,536.3,0.54 s
+warm,Q11,ClickHouse 26.8,342.47,0.34 s
+cold,Q12,ClickHouse 26.8,2490.04,2.49 s
+warm,Q12,ClickHouse 26.8,1192.7,1.19 s
+cold,Q13,ClickHouse 26.8,2178.14,2.18 s
+warm,Q13,ClickHouse 26.8,1893.12,1.89 s
+cold,Q14,ClickHouse 26.8,2539.56,2.54 s
+warm,Q14,ClickHouse 26.8,706.86,0.71 s
+cold,Q15,ClickHouse 26.8,3077.86,3.08 s
+warm,Q15,ClickHouse 26.8,1339.12,1.34 s
+cold,Q16,ClickHouse 26.8,501.88,0.50 s
+warm,Q16,ClickHouse 26.8,383.16,0.38 s
+cold,Q17,ClickHouse 26.8,2225.31,2.23 s
+warm,Q17,ClickHouse 26.8,1215.6,1.22 s
+cold,Q18,ClickHouse 26.8,3392.58,3.39 s
+warm,Q18,ClickHouse 26.8,2654.02,2.65 s
+cold,Q19,ClickHouse 26.8,4335.09,4.34 s
+warm,Q19,ClickHouse 26.8,1548.35,1.55 s
+cold,Q20,ClickHouse 26.8,2697.9,2.70 s
+warm,Q20,ClickHouse 26.8,695.07,0.70 s
+cold,Q21,ClickHouse 26.8,5778.4,5.78 s
+warm,Q21,ClickHouse 26.8,4437.69,4.44 s
+cold,Q22,ClickHouse 26.8,589.62,0.59 s
+warm,Q22,ClickHouse 26.8,340.44,0.34 s
+cold,Q1,ClickHouse 26.10,3635.72,3.64 s
+warm,Q1,ClickHouse 26.10,3348.31,3.35 s
+cold,Q2,ClickHouse 26.10,591.74,0.59 s
+warm,Q2,ClickHouse 26.10,482.47,0.48 s
+cold,Q3,ClickHouse 26.10,2466.77,2.47 s
+warm,Q3,ClickHouse 26.10,2217.88,2.22 s
+cold,Q4,ClickHouse 26.10,1450.13,1.45 s
+warm,Q4,ClickHouse 26.10,1209.66,1.21 s
+cold,Q5,ClickHouse 26.10,2326.65,2.33 s
+warm,Q5,ClickHouse 26.10,2146.35,2.15 s
+cold,Q6,ClickHouse 26.10,1861.4,1.86 s
+warm,Q6,ClickHouse 26.10,1727.79,1.73 s
+cold,Q7,ClickHouse 26.10,2429.56,2.43 s
+warm,Q7,ClickHouse 26.10,2038.96,2.04 s
+cold,Q8,ClickHouse 26.10,2600.32,2.60 s
+warm,Q8,ClickHouse 26.10,2114.92,2.11 s
+cold,Q9,ClickHouse 26.10,5504.53,5.50 s
+warm,Q9,ClickHouse 26.10,5147.18,5.15 s
+cold,Q10,ClickHouse 26.10,2966.98,2.97 s
+warm,Q10,ClickHouse 26.10,2568.18,2.57 s
+cold,Q11,ClickHouse 26.10,541.81,0.54 s
+warm,Q11,ClickHouse 26.10,456.71,0.46 s
+cold,Q12,ClickHouse 26.10,2382.76,2.38 s
+warm,Q12,ClickHouse 26.10,2058.61,2.06 s
+cold,Q13,ClickHouse 26.10,2487.22,2.49 s
+warm,Q13,ClickHouse 26.10,2288.18,2.29 s
+cold,Q14,ClickHouse 26.10,1768.59,1.77 s
+warm,Q14,ClickHouse 26.10,1334.97,1.33 s
+cold,Q15,ClickHouse 26.10,2871.26,2.87 s
+warm,Q15,ClickHouse 26.10,2554.08,2.55 s
+cold,Q16,ClickHouse 26.10,505.77,0.51 s
+warm,Q16,ClickHouse 26.10,417.83,0.42 s
+cold,Q17,ClickHouse 26.10,2484.09,2.48 s
+warm,Q17,ClickHouse 26.10,2243.97,2.24 s
+cold,Q18,ClickHouse 26.10,3180.21,3.18 s
+warm,Q18,ClickHouse 26.10,2868.64,2.87 s
+cold,Q19,ClickHouse 26.10,3219.83,3.22 s
+warm,Q19,ClickHouse 26.10,2890.79,2.89 s
+cold,Q20,ClickHouse 26.10,2057.44,2.06 s
+warm,Q20,ClickHouse 26.10,1245.18,1.25 s
+cold,Q21,ClickHouse 26.10,5831.52,5.83 s
+warm,Q21,ClickHouse 26.10,5195.23,5.20 s
+cold,Q22,ClickHouse 26.10,554.69,0.55 s
+warm,Q22,ClickHouse 26.10,398.28,0.40 s
+cold,Q1,StarRocks,4520.18,4.52 s
+warm,Q1,StarRocks,4280.81,4.28 s
+cold,Q2,StarRocks,763.34,0.76 s
+warm,Q2,StarRocks,154.38,0.15 s
+cold,Q3,StarRocks,2694.84,2.69 s
+warm,Q3,StarRocks,1969.58,1.97 s
+cold,Q4,StarRocks,1596.07,1.60 s
+warm,Q4,StarRocks,1015.29,1.02 s
+cold,Q5,StarRocks,2523.82,2.52 s
+warm,Q5,StarRocks,1767.44,1.77 s
+cold,Q6,StarRocks,1260.66,1.26 s
+warm,Q6,StarRocks,594.38,0.59 s
+cold,Q7,StarRocks,2777.04,2.78 s
+warm,Q7,StarRocks,1813.56,1.81 s
+cold,Q8,StarRocks,2773.66,2.77 s
+warm,Q8,StarRocks,1666.84,1.67 s
+cold,Q9,StarRocks,4029.45,4.03 s
+warm,Q9,StarRocks,3074.35,3.07 s
+cold,Q10,StarRocks,3114.99,3.11 s
+warm,Q10,StarRocks,2232.8,2.23 s
+cold,Q11,StarRocks,853.86,0.85 s
+warm,Q11,StarRocks,432.31,0.43 s
+cold,Q12,StarRocks,1916.0,1.92 s
+warm,Q12,StarRocks,1216.47,1.22 s
+cold,Q13,StarRocks,2534.53,2.53 s
+warm,Q13,StarRocks,2217.93,2.22 s
+cold,Q14,StarRocks,1791.82,1.79 s
+warm,Q14,StarRocks,696.62,0.70 s
+cold,Q15,StarRocks,1683.9,1.68 s
+warm,Q15,StarRocks,756.0,0.76 s
+cold,Q16,StarRocks,852.9,0.85 s
+warm,Q16,StarRocks,339.27,0.34 s
+cold,Q17,StarRocks,1617.47,1.62 s
+warm,Q17,StarRocks,566.98,0.57 s
+cold,Q18,StarRocks,3470.42,3.47 s
+warm,Q18,StarRocks,3037.04,3.04 s
+cold,Q19,StarRocks,1822.32,1.82 s
+warm,Q19,StarRocks,920.99,0.92 s
+cold,Q20,StarRocks,2297.72,2.30 s
+warm,Q20,StarRocks,899.98,0.90 s
+cold,Q21,StarRocks,2873.9,2.87 s
+warm,Q21,StarRocks,2080.24,2.08 s
+cold,Q22,StarRocks,673.16,0.67 s
+warm,Q22,StarRocks,348.89,0.35 s
