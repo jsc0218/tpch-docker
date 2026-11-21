@@ -52,7 +52,8 @@ docker logs -f whpg      # wait for "[whpg-bootstrap] bootstrap complete" (about
 - `WHPG_ROLE=coordinator` is required. Without it the container starts as a segment and creates
   no database.
 - `WHPG_SEGMENTS_PER_HOST` is the number of primary segments; 16 was used on a 32 vCPU host.
-  `WHPG_MIRRORS=off` leaves out the mirror: with one segment it cut an SF1 load from 67 s to 30 s.
+  `WHPG_MIRRORS=off` leaves out the mirror: with one segment an SF1 load took 19.5 s with the
+  mirror and 19.4 s without (heap tables: 17.3 s and 15.7 s), so it matters little here.
 - `--hostname cdw`, the `ping_group_range` sysctl, `--shm-size` and `--ulimit` are the settings
   the image's own validation uses. `--stop-timeout 60` leaves a clean stop room beyond Docker's default
   10 s grace period (a stop took about 3 s in the latest run and about 12 s in an earlier one).
@@ -148,14 +149,16 @@ sudo rm -rf /data/whpg      # deletes the database files
   results. The numbers above are from digest
   `sha256:8bedf6ff77d28d5e936eae3dec35fa35da54aa76f6fa54dd5e7cb5febf38d70e`.
 - No indexes and no tuning; record the distribution keys and any settings with results.
-- Tuning was tried on SF10 (on plain heap tables, before the switch to column storage) and left out. Raising `statement_mem` to 1 GB changed nothing: the
-  Q12 hash table is built on the filtered `lineitem` rows (about 10,000 per segment), uses 1.5 MB
-  and does not spill. A larger `shared_buffers` (2 GB per segment) changed nothing either. 32
-  segments instead of 16 gave 16 to 22 % on Q6 and Q12, which fits the hyperthreading: 16
-  segments already use every physical core.
+- Tuning was tried on SF10 (on plain heap tables, with 16 segments) and left out. Raising
+  `statement_mem` to 1 GB did not change Q6 (441 ms) and made Q12 slower (657 to 712-726 ms): the
+  Q12 hash table is built on the filtered `lineitem` rows (about 20,000 per segment), uses 2 MB and
+  does not spill, so there is nothing to gain. A larger `shared_buffers` (2 GB per segment) changed
+  nothing (Q6 441 to 454 ms, Q12 658 to 659 ms). 32 segments instead of 16 gave about 2 % on Q6 and
+  Q12 (444 to 434 ms and 659 to 646 ms) and a bootstrap of 83 s instead of 45 s, which fits the
+  hyperthreading: 16 segments already use every physical core.
 - Primary keys on `orders` and `lineitem` plus single-column date indexes (within the TPC-H
-  rules) made Q6 and Q12 slower on SF10 (heap tables) (ORCA chose index scans on the date columns); they were
-  dropped again.
+  rules) changed little on SF10 (heap tables, after `ANALYZE`): ORCA chose index scans on the date
+  columns, and Q6 took 451 ms against 441 ms, Q12 635 ms against 658 ms. They were dropped again.
 - Database size is the sum of `sotdsize + sotdtoastsize + sotdadditionalsize` in
   `gp_toolkit.gp_size_of_table_disk` over the tables on all segments (the small append-optimized
   bookkeeping tables are not counted). The data directories are larger because

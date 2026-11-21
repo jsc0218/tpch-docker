@@ -66,8 +66,8 @@ docker run -d --name pg18 \
   -c jit=off
 ```
 
-Pin the image tag. PostgreSQL 19 is only at a release candidate (`19rc1`) as of 2026-10-19; use
-a separate data directory per major version. The 18 image keeps its data in
+Pin the image tag. The results here are from 18.6; PostgreSQL 18.7 was released on 2026-11-12
+and PostgreSQL 19 on 2026-11-19. Use a separate data directory per major version. The 18 image keeps its data in
 `/var/lib/postgresql/18/docker`, so mounting `/var/lib/postgresql` works.
 
 `--shm-size=16g` is needed: Docker gives a container only 64 MB of `/dev/shm` by default, and

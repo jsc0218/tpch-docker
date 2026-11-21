@@ -133,10 +133,16 @@ docker exec -i chs3 clickhouse-client --remote_read_min_bytes_for_seek=1048576 -
 
 Q6, no cache, median of 3 (S3 data read, requests): 4 MiB 4.80 s (1.93 GiB, 131); 1 MiB 1.36 s
 (613 MiB, 526); 256 KiB 2.11 s (613 MiB, 917); 8 KiB 17.1 s (561 MiB, 8963); 0 31.1 s (559 MiB,
-17817). The cache segment size (`max_file_segment_size`, `boundary_alignment`) made no
-difference: 4 MiB and 1 MiB segments gave the same bytes read and timings as the default 32 MiB.
-With the cache on, the filling run still reads up to 1.6 GiB from S3; only later runs read the
-lower amount. Check every answer after changing the setting (they matched here).
+17817). The cache segment size (`max_file_segment_size`) only changes the filling run. With the
+1 MiB seek setting, 4 MiB segments read the same from S3 as the default 32 MiB (Q6 1646 MiB, Q12
+494 MiB), while 1 MiB segments read 874 MiB for Q6 and 708 MiB for Q12, with about twice as many
+requests for Q6 (1134 against 528). `boundary_alignment` (4 MiB by default) must not exceed the
+segment size, so 1 MiB segments also need `boundary_alignment` set to 1 MiB, or the server does
+not start. With the default seek setting, 1 MiB segments made the Q6 filling run slower (10.4 s
+against 5.4 s) and the second run still read 299 MiB (1.4 s against 0.27 s). Later runs with the
+1 MiB seek setting were the same for all three sizes. With the cache on, the filling run reads up
+to 1.6 GiB from S3 (2.2 GiB with the default seek setting); only later runs read the lower
+amount. Check every answer after changing the setting (they matched here).
 
 ## Observed so far (not a benchmark)
 
